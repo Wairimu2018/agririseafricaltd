@@ -6,57 +6,67 @@
 
 @layer base {
   :root {
-    /* Nature-inspired color palette */
-    --background: 0 0% 100%;
-    --foreground: 120 15% 15%;
+    /* Sophisticated earth-inspired palette similar to Freshfield */
+    --background: 0 0% 99%;
+    --foreground: 0 0% 7%;
 
     --card: 0 0% 100%;
-    --card-foreground: 120 15% 15%;
+    --card-foreground: 0 0% 7%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 120 15% 15%;
+    --popover-foreground: 0 0% 7%;
 
-    /* Primary: Deep forest green */
-    --primary: 140 60% 25%;
+    /* Primary: Deep forest green inspired by Freshfield */
+    --primary: 120 50% 15%;
     --primary-foreground: 0 0% 98%;
-    --primary-light: 140 45% 35%;
-    --primary-glow: 140 55% 45%;
+    --primary-light: 120 40% 25%;
+    --primary-glow: 120 45% 35%;
 
-    /* Secondary: Fresh green */
-    --secondary: 120 40% 85%;
-    --secondary-foreground: 120 60% 20%;
+    /* Secondary: Warm earth tones */
+    --secondary: 40 15% 92%;
+    --secondary-foreground: 120 30% 20%;
 
-    /* Earth tones */
-    --muted: 45 25% 92%;
-    --muted-foreground: 45 10% 45%;
+    /* Sophisticated neutrals */
+    --muted: 40 10% 95%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 75 60% 88%;
-    --accent-foreground: 120 50% 25%;
+    --accent: 120 25% 88%;
+    --accent-foreground: 120 50% 15%;
 
-    /* Nature accents */
-    --earth: 35 45% 65%;
-    --sky: 200 80% 85%;
-    --harvest: 45 85% 60%;
+    /* Inspired color additions */
+    --earth: 35 30% 60%;
+    --sage: 100 20% 75%;
+    --cream: 45 40% 96%;
+    --charcoal: 0 0% 15%;
+    
+    /* Enhanced nature palette */
+    --forest-deep: 120 60% 12%;
+    --forest-medium: 120 45% 25%;
+    --field-gold: 45 60% 70%;
+    --soil-brown: 25 25% 45%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 120 20% 88%;
-    --input: 120 20% 88%;
-    --ring: 140 60% 25%;
+    --border: 40 15% 88%;
+    --input: 40 15% 88%;
+    --ring: 120 50% 15%;
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
-    --gradient-earth: linear-gradient(180deg, hsl(var(--sky)), hsl(var(--accent)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.9), hsl(var(--primary-light) / 0.8));
+    /* Enhanced gradients inspired by aerial farm views */
+    --gradient-hero: linear-gradient(135deg, hsl(120 60% 12% / 0.95), hsl(120 45% 25% / 0.85));
+    --gradient-earth: linear-gradient(180deg, hsl(100 20% 75%), hsl(45 40% 96%));
+    --gradient-fields: linear-gradient(45deg, hsl(120 45% 25%), hsl(45 60% 70%), hsl(25 25% 45%));
+    --gradient-subtle: linear-gradient(180deg, hsl(45 40% 96%), hsl(40 15% 92%));
 
-    /* Shadows */
-    --shadow-nature: 0 10px 40px -10px hsl(var(--primary) / 0.2);
-    --shadow-soft: 0 4px 20px -5px hsl(var(--primary) / 0.15);
+    /* Sophisticated shadows */
+    --shadow-soft: 0 2px 20px -5px hsl(120 50% 15% / 0.08);
+    --shadow-medium: 0 8px 40px -10px hsl(120 50% 15% / 0.15);
+    --shadow-strong: 0 20px 60px -15px hsl(120 50% 15% / 0.25);
 
-    /* Animations */
+    /* Smooth transitions */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-slow: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     --radius: 0.5rem;
 
@@ -122,26 +132,88 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans antialiased;
   }
 
-  /* Smooth transitions for all interactive elements */
-  button, a, input, textarea {
-    @apply transition-all duration-300;
+  /* Enhanced smooth transitions for all interactive elements */
+  button, a, input, textarea, .card {
+    transition: var(--transition-smooth);
   }
 }
 
 @layer components {
   .gradient-text {
-    @apply bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent;
-  }
-  
-  .nature-shadow {
-    box-shadow: var(--shadow-nature);
+    @apply bg-gradient-to-r from-forest-deep to-forest-medium bg-clip-text text-transparent;
   }
   
   .soft-shadow {
     box-shadow: var(--shadow-soft);
+  }
+  
+  .medium-shadow {
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .strong-shadow {
+    box-shadow: var(--shadow-strong);
+  }
+
+  /* Enhanced animations inspired by Freshfield */
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+}
+
+@layer utilities {
+  /* Keyframes for smooth animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:transform hover:scale-105 hover:shadow-medium;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-strong;
   }
 }
 

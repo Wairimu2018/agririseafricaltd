@@ -1,77 +1,88 @@
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Play } from 'lucide-react';
-import heroImage from '@/assets/hero-agriculture.jpg';
+import { ArrowRight, Play, ArrowDown } from 'lucide-react';
+import aerialHeroImage from '@/assets/aerial-farm-hero.jpg';
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Image - Aerial Farm View */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url(${aerialHeroImage})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/60 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-forest-deep/90 via-forest-medium/70 to-forest-deep/40"></div>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center lg:text-left">
-        <div className="max-w-4xl">
-          <div className="mb-6">
-            <span className="inline-block bg-accent/90 text-accent-foreground px-4 py-2 rounded-full text-sm font-medium mb-4">
-              🌱 Feeding the Future with Smart Farming
-            </span>
-          </div>
+      {/* Content Grid - Inspired by Freshfield */}
+      <div className="relative z-10 container mx-auto px-4 h-full min-h-screen flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground mb-6 leading-tight">
-            Revolutionizing
-            <span className="block text-harvest">Agriculture</span>
-            <span className="block">with Technology</span>
-          </h1>
+          {/* Left Side - Value Props */}
+          <div className="space-y-8">
+            {/* Tag Line Badges - Inspired by Freshfield's "Driven, Rooted, Impactful" */}
+            <div className="flex flex-col space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-4 h-4 bg-field-gold rounded-sm"></div>
+                <span className="text-sm font-medium text-cream tracking-wide uppercase">Driven</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-4 h-4 bg-sage rounded-sm"></div>
+                <span className="text-sm font-medium text-cream tracking-wide uppercase">Rooted</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-4 h-4 bg-field-gold rounded-sm"></div>
+                <span className="text-sm font-medium text-cream tracking-wide uppercase">Impactful</span>
+              </div>
+            </div>
 
-          <p className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-2xl">
-            Empower your farm with cutting-edge IoT sensors, AI-driven analytics, and sustainable solutions. 
-            Increase yields, reduce costs, and build a greener future.
-          </p>
+            {/* Main Message */}
+            <div className="max-w-lg">
+              <p className="text-lg md:text-xl text-cream/90 leading-relaxed">
+                Through sustainable farming and smart collaboration, we grow more than crops — we grow impact.
+              </p>
+            </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <Button 
-              size="lg" 
-              className="bg-harvest text-primary hover:bg-harvest/90 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            >
-              Request a Demo
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 backdrop-blur-sm"
-            >
-              <Play className="mr-2 w-5 h-5" />
-              Watch Video
-            </Button>
+            {/* CTA Button */}
+            <div>
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="border-cream/30 text-cream hover:bg-cream/10 backdrop-blur-sm text-base px-8 py-3 group"
+              >
+                Start growing with us
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
           </div>
 
-          {/* Stats */}
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-md">
-            <div className="text-center lg:text-left">
-              <div className="text-2xl md:text-3xl font-bold text-harvest">500+</div>
-              <div className="text-sm text-primary-foreground/80">Farms Transformed</div>
-            </div>
-            <div className="text-center lg:text-left">
-              <div className="text-2xl md:text-3xl font-bold text-harvest">30%</div>
-              <div className="text-sm text-primary-foreground/80">Yield Increase</div>
-            </div>
-            <div className="text-center lg:text-left">
-              <div className="text-2xl md:text-3xl font-bold text-harvest">50M+</div>
-              <div className="text-sm text-primary-foreground/80">Data Points</div>
+          {/* Right Side - Main Headline */}
+          <div className="lg:text-right">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-cream leading-tight">
+              Redefining
+              <span className="block">agriculture at</span>
+              <span className="block">a global scale</span>
+            </h1>
+            
+            {/* Coordinates - Inspired by Freshfield */}
+            <div className="mt-8 lg:mt-12">
+              <p className="text-cream/60 text-sm tracking-wide font-mono">
+                35.6895° N, 139.6917° E
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent"></div>
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="flex flex-col items-center space-y-2">
+          <p className="text-cream/80 text-sm tracking-wide">Start growing with us</p>
+          <ArrowDown className="w-4 h-4 text-cream/60" />
+        </div>
+      </div>
+
+      {/* Subtle bottom fade */}
+      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-background to-transparent"></div>
     </section>
   );
 };

@@ -55,8 +55,13 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				earth: 'hsl(var(--earth))',
-				sky: 'hsl(var(--sky))',
-				harvest: 'hsl(var(--harvest))',
+				sage: 'hsl(var(--sage))',
+				cream: 'hsl(var(--cream))',
+				charcoal: 'hsl(var(--charcoal))',
+				'forest-deep': 'hsl(var(--forest-deep))',
+				'forest-medium': 'hsl(var(--forest-medium))',
+				'field-gold': 'hsl(var(--field-gold))',
+				'soil-brown': 'hsl(var(--soil-brown))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
