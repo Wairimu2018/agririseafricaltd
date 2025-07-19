@@ -12,12 +12,24 @@ import {
   CheckCircle,
   Zap,
   Shield,
-  TrendingUp
+  TrendingUp,
+  Sun,
+  Droplets
 } from 'lucide-react';
 import precisionImage from '@/assets/precision-farming.jpg';
+import solarImage from '@/assets/solar-irrigation.jpg';
 
 const Solutions = () => {
   const solutions = [
+    {
+      icon: <Sun className="w-8 h-8 text-harvest" />,
+      title: "Solar Smart Irrigation",
+      description: "Solar-powered irrigation systems with AI-driven water management, reducing energy costs by 80% while optimizing crop hydration.",
+      features: ["Solar panel integration", "Smart water sensors", "Automated scheduling", "Weather-based adjustments", "Remote monitoring"],
+      benefits: ["80% energy savings", "40% water conservation", "Zero carbon footprint", "24/7 operation"],
+      price: "Starting at $349/month",
+      popular: true
+    },
     {
       icon: <Gauge className="w-8 h-8 text-primary" />,
       title: "Precision Farming Tools",
@@ -110,26 +122,26 @@ const Solutions = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge className="mb-4 bg-primary/10 text-primary hover:bg-primary/20">Featured Solution</Badge>
+              <Badge className="mb-4 bg-harvest/10 text-harvest hover:bg-harvest/20">Featured Solution</Badge>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Precision Farming Technology
+                Solar Smart Irrigation
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Our precision farming tools combine IoT sensors, satellite imagery, and AI analytics 
-                to give you unprecedented insight into your farm's performance.
+                Revolutionary solar-powered irrigation systems that combine renewable energy with AI-driven 
+                water management to create the most sustainable and cost-effective farming solution.
               </p>
               <div className="space-y-4 mb-8">
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-primary" />
-                  <span className="text-foreground">Real-time soil and weather monitoring</span>
+                  <Sun className="w-5 h-5 text-harvest" />
+                  <span className="text-foreground">100% solar-powered operation</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Droplets className="w-5 h-5 text-primary" />
+                  <span className="text-foreground">AI-optimized water distribution</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-primary" />
-                  <span className="text-foreground">AI-powered crop health analysis</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-primary" />
-                  <span className="text-foreground">Automated irrigation optimization</span>
+                  <span className="text-foreground">80% reduction in energy costs</span>
                 </div>
               </div>
               <Button variant="nature" size="lg">
@@ -139,11 +151,11 @@ const Solutions = () => {
             </div>
             <div className="relative">
               <img 
-                src={precisionImage} 
-                alt="Precision Farming Technology"
+                src={solarImage} 
+                alt="Solar Smart Irrigation System"
                 className="w-full h-96 object-cover rounded-2xl shadow-lg"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-2xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-harvest/20 to-transparent rounded-2xl"></div>
             </div>
           </div>
         </div>

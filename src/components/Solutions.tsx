@@ -6,11 +6,19 @@ import {
   Gauge, 
   Brain, 
   Leaf, 
-  ArrowRight 
+  ArrowRight,
+  Sun
 } from 'lucide-react';
 
 const Solutions = () => {
   const solutions = [
+    {
+      icon: <Sun className="w-8 h-8 text-harvest" />,
+      title: "Solar Smart Irrigation",
+      description: "Solar-powered irrigation systems with AI-driven water management, reducing energy costs by 80% while optimizing crop hydration.",
+      features: ["Solar panel integration", "Smart water sensors", "Weather-based scheduling"],
+      color: "from-harvest to-primary"
+    },
     {
       icon: <Gauge className="w-8 h-8 text-primary" />,
       title: "Precision Farming Tools",
