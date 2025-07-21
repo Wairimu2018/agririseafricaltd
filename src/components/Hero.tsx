@@ -1,90 +1,79 @@
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Play, ArrowDown } from 'lucide-react';
+import { Badge } from "@/components/ui/badge";
+// import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown} from 'lucide-react';
 import aerialHeroImage from '@/assets/aerial-farm-hero.jpg';
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image - Aerial Farm View */}
-      <div 
+      {/* Background Image */}
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${aerialHeroImage})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-forest-deep/90 via-forest-medium/70 to-forest-deep/40"></div>
+        >
+        <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
-      {/* Content Grid - Inspired by Freshfield */}
-      <div className="relative z-10 container mx-auto px-4 h-full min-h-screen flex items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
-          
-          {/* Left Side - Value Props */}
-          <div className="space-y-8">
-            {/* Tag Line Badges - Inspired by Freshfield's "Driven, Rooted, Impactful" */}
-            <div className="flex flex-col space-y-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-4 h-4 bg-field-gold rounded-sm"></div>
-                <span className="text-sm font-medium text-cream tracking-wide uppercase">Driven</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-4 h-4 bg-sage rounded-sm"></div>
-                <span className="text-sm font-medium text-cream tracking-wide uppercase">Rooted</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-4 h-4 bg-field-gold rounded-sm"></div>
-                <span className="text-sm font-medium text-cream tracking-wide uppercase">Impactful</span>
-              </div>
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-4 py-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <div className="text-white space-y-8 animate-slide-in-left">
+            {/* Badges */}
+            <div className="flex flex-wrap gap-4">
+              <Badge variant="secondary" className="bg-white/10 text-white border-white/20 hover:bg-white/20 animate-fade-in stagger-1">
+                <div className="w-2 h-2 bg-white rounded-full mr-2 animate-float"></div>
+                Driven
+              </Badge>
+              <Badge variant="secondary" className="bg-white/10 text-white border-white/20 hover:bg-white/20 animate-fade-in stagger-2">
+                <div className="w-2 h-2 bg-white rounded-full mr-2 animate-float"></div>
+                Rooted
+              </Badge>
+              <Badge variant="secondary" className="bg-white/10 text-white border-white/20 hover:bg-white/20 animate-fade-in stagger-3">
+                <div className="w-2 h-2 bg-white rounded-full mr-2 animate-float"></div>
+                Impactful
+              </Badge>
             </div>
 
-            {/* Main Message */}
-            <div className="max-w-lg">
-              <p className="text-lg md:text-xl text-cream/90 leading-relaxed">
+            {/* Main Text */}
+            <div className="space-y-6 animate-fade-in stagger-4">
+              <p className="text-lg leading-relaxed">
                 Through sustainable farming and smart collaboration, we grow more than crops — we grow impact.
               </p>
-            </div>
-
-            {/* CTA Button */}
-            <div>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="border-cream/30 text-cream hover:bg-cream/10 backdrop-blur-sm text-base px-8 py-3 group"
-              >
+              
+              <Button variant="Hero" size="lg" className="bg-white/10 text-white border border-white/20 hover:bg-white/20 hover-lift">
                 Start growing with us
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
           </div>
 
-          {/* Right Side - Main Headline */}
-          <div className="lg:text-right">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-cream leading-tight">
-              Redefining
-              <span className="block">agriculture at</span>
-              <span className="block">a global scale</span>
-            </h1>
-            
-            {/* Coordinates - Inspired by Freshfield */}
-            <div className="mt-8 lg:mt-12">
-              <p className="text-cream/60 text-sm tracking-wide font-mono">
-                35.6895° N, 139.6917° E
-              </p>
+          {/* Right Content */}
+          <div className="text-white space-y-8 animate-slide-in-right">
+            <div className="space-y-4 animate-fade-in stagger-5">
+              <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+                Redefining agriculture at a global scale
+              </h1>
+              
+              <div className="flex items-center space-x-2 text-sm opacity-80 animate-fade-in stagger-6">
+                <span>35.6895° N, 139.6917° E</span>
+              </div>
             </div>
+
+            <Button variant="Hero" size="lg" className="bg-white/10 text-white border border-white/20 hover:bg-white/20 hover-lift animate-fade-in stagger-6">
+              Start growing with us
+              <ChevronDown className="ml-2 h-4 w-4" />
+            </Button>
           </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="flex flex-col items-center space-y-2">
-          <p className="text-cream/80 text-sm tracking-wide">Start growing with us</p>
-          <ArrowDown className="w-4 h-4 text-cream/60" />
-        </div>
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+        <ChevronDown className="h-6 w-6" />
       </div>
-
-      {/* Subtle bottom fade */}
-      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-background to-transparent"></div>
     </section>
   );
 };
-
 export default Hero;

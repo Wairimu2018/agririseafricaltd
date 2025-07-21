@@ -2,71 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Agritech Design System - Nature-inspired with modern tech elements */
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
 
 @layer base {
   :root {
-    /* Sophisticated earth-inspired palette similar to Freshfield */
-    --background: 0 0% 99%;
-    --foreground: 0 0% 7%;
+    --background: 0 0% 100%;
+    --foreground: 120 8% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 7%;
+    --card-foreground: 120 8% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 7%;
+    --popover-foreground: 120 8% 15%;
 
-    /* Primary: Deep forest green inspired by Freshfield */
-    --primary: 120 50% 15%;
+    --primary: 120 60% 25%;
     --primary-foreground: 0 0% 98%;
-    --primary-light: 120 40% 25%;
-    --primary-glow: 120 45% 35%;
 
-    /* Secondary: Warm earth tones */
-    --secondary: 40 15% 92%;
-    --secondary-foreground: 120 30% 20%;
+    --secondary: 120 15% 95%;
+    --secondary-foreground: 120 8% 15%;
 
-    /* Sophisticated neutrals */
-    --muted: 40 10% 95%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 120 15% 95%;
+    --muted-foreground: 120 5% 50%;
 
-    --accent: 120 25% 88%;
-    --accent-foreground: 120 50% 15%;
+    --accent: 95 85% 85%;
+    --accent-foreground: 120 8% 15%;
 
-    /* Inspired color additions */
-    --earth: 35 30% 60%;
-    --sage: 100 20% 75%;
-    --cream: 45 40% 96%;
-    --charcoal: 0 0% 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 120 15% 90%;
+    --input: 120 15% 90%;
+    --ring: 120 60% 25%;
+
+    /* Agricultural design tokens */
+    --primary-dark: 120 70% 20%;
+    --primary-light: 120 50% 35%;
+    --earth-brown: 28 45% 25%;
+    --earth-beige: 28 25% 85%;
+    --nature-green: 95 85% 85%;
     
-    /* Enhanced nature palette */
-    --forest-deep: 120 60% 12%;
-    --forest-medium: 120 45% 25%;
-    --field-gold: 45 60% 70%;
-    --soil-brown: 25 25% 45%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 40 15% 88%;
-    --input: 40 15% 88%;
-    --ring: 120 50% 15%;
-
-    /* Enhanced gradients inspired by aerial farm views */
-    --gradient-hero: linear-gradient(135deg, hsl(120 60% 12% / 0.95), hsl(120 45% 25% / 0.85));
-    --gradient-earth: linear-gradient(180deg, hsl(100 20% 75%), hsl(45 40% 96%));
-    --gradient-fields: linear-gradient(45deg, hsl(120 45% 25%), hsl(45 60% 70%), hsl(25 25% 45%));
-    --gradient-subtle: linear-gradient(180deg, hsl(45 40% 96%), hsl(40 15% 92%));
-
-    /* Sophisticated shadows */
-    --shadow-soft: 0 2px 20px -5px hsl(120 50% 15% / 0.08);
-    --shadow-medium: 0 8px 40px -10px hsl(120 50% 15% / 0.15);
-    --shadow-strong: 0 20px 60px -15px hsl(120 50% 15% / 0.25);
-
-    /* Smooth transitions */
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --transition-slow: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(120, 40%, 15%) 0%, hsl(120, 60%, 25%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(95, 85%, 85%) 0%, hsl(120, 50%, 90%) 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px hsl(120 20% 20% / 0.1);
+    --shadow-strong: 0 8px 40px hsl(120 20% 20% / 0.15);
 
     --radius: 0.5rem;
 
@@ -88,33 +71,33 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 120 15% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 120 15% 8%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 120 15% 8%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 120 50% 35%;
+    --primary-foreground: 0 0% 95%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 120 10% 15%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 120 10% 15%;
+    --muted-foreground: 120 5% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 95 35% 25%;
+    --accent-foreground: 0 0% 95%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 120 10% 20%;
+    --input: 120 10% 20%;
+    --ring: 120 50% 35%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -132,97 +115,161 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-  }
-
-  /* Enhanced smooth transitions for all interactive elements */
-  button, a, input, textarea, .card {
-    transition: var(--transition-smooth);
-  }
-}
-
-@layer components {
-  .gradient-text {
-    @apply bg-gradient-to-r from-forest-deep to-forest-medium bg-clip-text text-transparent;
-  }
-  
-  .soft-shadow {
-    box-shadow: var(--shadow-soft);
-  }
-  
-  .medium-shadow {
-    box-shadow: var(--shadow-medium);
-  }
-  
-  .strong-shadow {
-    box-shadow: var(--shadow-strong);
-  }
-
-  /* Enhanced animations inspired by Freshfield */
-  .animate-fade-in {
-    animation: fadeIn 0.4s ease-out;
-  }
-  
-  .animate-slide-up {
-    animation: slideUp 0.6s ease-out;
-  }
-  
-  .animate-scale-in {
-    animation: scaleIn 0.3s ease-out;
+    @apply bg-background text-foreground;
   }
 }
 
 @layer utilities {
-  /* Keyframes for smooth animations */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Animation Utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
   }
   
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
   }
   
-  @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
+  .animate-slide-in-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+    -webkit-animation:;
+}
   
-  /* Hover effects */
+  .animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+    -webkit-animation:;
+}
+  
+  .animate-scale-in {
+    animation: scaleIn 0.6s ease-out forwards;
+    -webkit-animation:;
+}
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+    -webkit-animation:;
+}
+  
   .hover-lift {
-    @apply transition-all duration-300 hover:transform hover:scale-105 hover:shadow-medium;
-  }
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -webkit-transition:;
+    -moz-transition:;
+    -ms-transition:;
+    -o-transition:;
+}
   
-  .hover-glow {
-    @apply transition-all duration-300 hover:shadow-strong;
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    -webkit-transform: translateY(-8px);
+    -moz-transform: translateY(-8px);
+    -ms-transform: translateY(-8px);
+    -o-transform: translateY(-8px);
+}
+  
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+  .stagger-6 { animation-delay: 0.6s; }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    -webkit-transform:;
+    -moz-transform:;
+    -ms-transform:;
+    -o-transform:;
+}
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    -webkit-transform:;
+    -moz-transform:;
+    -ms-transform:;
+    -o-transform:;
+}
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+    -webkit-transform:;
+    -moz-transform:;
+    -ms-transform:;
+    -o-transform:;
+}
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    -webkit-transform:;
+    -moz-transform:;
+    -ms-transform:;
+    -o-transform:;
+}
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+    -webkit-transform:;
+    -moz-transform:;
+    -ms-transform:;
+    -o-transform:;
+}
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    -webkit-transform:;
+    -moz-transform:;
+    -ms-transform:;
+    -o-transform:;
+}
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+    -webkit-transform:;
+    -moz-transform:;
+    -ms-transform:;
+    -o-transform:;
+}
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    -webkit-transform:;
+    -moz-transform:;
+    -ms-transform:;
+    -o-transform:;
+}
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+    -webkit-transform:;
+    -moz-transform:;
+    -ms-transform:;
+    -o-transform:;
+}
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
   }
-
-  body {
-    @apply bg-background text-foreground;
+  50% {
+    transform: translateY(-10px);
   }
 }

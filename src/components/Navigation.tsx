@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Leaf } from 'lucide-react';
+import logo from '@/assets/logo.png';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +12,7 @@ const Navigation = () => {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Solutions', path: '/solutions' },
-    { name: 'Resources', path: '/resources' },
+    // { name: 'Resources', path: '/resources' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -24,9 +25,14 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <div className="bg-gradient-to-br from-forest-deep to-forest-medium p-2.5 rounded-lg shadow-medium">
-              <Leaf className="w-6 h-6 text-cream" />
+              {/* <Leaf className="w-6 h-6 text-cream" /> */}
+
+<Link to="/" className="flex items-center space-x-3">
+  <img src={logo} alt="AgriRise Logo" className="h-16 w-auto" />
+</Link>
+
             </div>
-            <span className="text-xl font-bold text-charcoal tracking-tight">AgriTech</span>
+            <span className="text-xl font-bold text-charcoal tracking-tight">AgriRise</span>
           </Link>
 
           {/* Desktop Navigation */}
