@@ -12,8 +12,8 @@ import Layout from "./components/Layout";
 import SolarSmartIrrigation from "./pages/solutions/SolarSmartIrrigation";
 import PrecisionFarming from "./pages/solutions/PrecisionFarming";
 import FarmManagement from "./pages/solutions/FarmManagement";
-import SoilWeatherMonitoring from "./pages/solutions/SoilWeatherMonitoring";
-import AIDataAnalytics from "./pages/solutions/AIDataAnalytics";
+import SoilWeatherMonitoring from "./pages/solutions/SoilandWeatherMonitoring";
+import AIDataAnalytics from "./pages/solutions/AIandDataAnalytics";
 import SustainableAgTech from "./pages/solutions/SustainableAgTech";
 
 const queryClient = new QueryClient();
