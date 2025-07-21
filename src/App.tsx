@@ -7,9 +7,11 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Solutions from "./pages/Solutions";
 import Contact from "./components/Contact";
-// import Resources from "./components/Resources";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
+import SolarSmartIrrigation from "./pages/solutions/SolarSmartIrrigation";
+import PrecisionFarming from "./pages/solutions/PrecisionFarming";
+import FarmManagement from "./pages/solutions/FarmManagement";
 
 const queryClient = new QueryClient();
 
@@ -23,9 +25,11 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/solutions" element={<Solutions />} />
+          <Route path="/solutions/solar-smart-irrigation" element={<SolarSmartIrrigation />} />
+          <Route path="/solutions/precision-farming" element={<PrecisionFarming />} />
+          <Route path="/solutions/farm-management" element={<FarmManagement />} />
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
-          {/* <Route path="/resources" element={<Resources />} /> */}
-          <Route path=".notfound" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </HashRouter>
     </TooltipProvider>

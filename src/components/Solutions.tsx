@@ -100,6 +100,17 @@ const Solutions = () => {
                   variant="outline" 
                   size="sm" 
                   className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300"
+                  onClick={() => {
+                    const routeMap: Record<string, string> = {
+                      'Solar Smart Irrigation': '/solutions/solar-smart-irrigation',
+                      'Precision Farming Tools': '/solutions/precision-farming',
+                      'Farm Management Software': '/solutions/farm-management'
+                    };
+                    const route = routeMap[solution.title];
+                    if (route) {
+                      window.location.href = route;
+                    }
+                  }}
                 >
                   Learn More
                   <ArrowRight className="ml-2 w-4 h-4" />
