@@ -273,3 +273,56 @@ All colors MUST be HSL.
     transform: translateY(-10px);
   }
 }
+
+/* @keyframes zoomIn {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+.animate-bg-zoom {
+  animation: zoomIn 10s ease-in-out infinite alternate;
+} */
+
+/* @keyframes rotateLeft {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-bg-rotate-left {
+  animation: rotateLeft 20s linear infinite;
+} */
+/* @keyframes rotateTo90 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-90deg);
+  }
+}
+
+.animate-bg-rotate-90 {
+  animation: rotateTo90 2s ease-out forwards;
+} */
+@keyframes subtleRotate {
+  0% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: rotate(-2deg);
+  }
+}
+
+.animate-drone-pan {
+  animation: subtleRotate 20s ease-in-out infinite;
+  transform-origin: center;
+}
