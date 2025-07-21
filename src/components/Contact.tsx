@@ -40,20 +40,20 @@ const Contact = () => {
     {
       icon: <Mail className="w-6 h-6 text-primary" />,
       title: "Email Us",
-      content: "hello@agritech.com",
+      content: "info@agririse.org",
       subtitle: "We'll respond within 24 hours"
     },
     {
       icon: <Phone className="w-6 h-6 text-primary" />,
       title: "Call Us",
-      content: "+1 (555) 123-4567",
+      content: "+254720355380",
       subtitle: "Mon-Fri 9AM-6PM EST"
     },
     {
       icon: <MapPin className="w-6 h-6 text-primary" />,
       title: "Visit Us",
-      content: "123 Innovation Drive, AgTech Park",
-      subtitle: "Silicon Valley, CA 94025"
+      content: "Buffallo Mall",
+      subtitle: "Naivasha, Kenya"
     }
   ];
 
@@ -167,7 +167,7 @@ const Contact = () => {
                         id="phone"
                         name="phone"
                         type="tel"
-                        placeholder="+1 (555) 123-4567"
+                        placeholder="+254720355380"
                         value={formData.phone}
                         onChange={handleInputChange}
                       />

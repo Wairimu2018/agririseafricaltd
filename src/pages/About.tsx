@@ -29,19 +29,19 @@ const About = () => {
 
   const team = [
     {
-      name: "Dr. Sarah Johnson",
+      name: "Dr. .....",
       role: "CEO & Founder",
       bio: "Agricultural engineer with 15+ years developing sustainable farming solutions.",
       image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face"
     },
     {
-      name: "Michael Chen",
+      name: "Michael......",
       role: "CTO",
       bio: "Former Google engineer specializing in IoT and machine learning applications.",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face"
     },
     {
-      name: "Dr. Maria Rodriguez",
+      name: "Dr.....",
       role: "Head of Research",
       bio: "PhD in Plant Biology, leading our agricultural research and development initiatives.",
       image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face"
@@ -57,14 +57,14 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <span className="inline-block bg-accent text-accent-foreground px-4 py-2 rounded-full text-sm font-medium mb-6">
-              About AgriTech
+              About AgriRise
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
               Transforming Agriculture
               <span className="block text-primary">Through Innovation</span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Founded in 2018, AgriTech has been at the forefront of agricultural technology, 
+              Founded in 2025, AgriRise has been at the forefront of agricultural technology, 
               helping farmers worldwide increase productivity while promoting sustainable practices.
             </p>
           </div>
