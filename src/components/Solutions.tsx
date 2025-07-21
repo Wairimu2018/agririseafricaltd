@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 import { 
   Cpu, 
   Smartphone, 
@@ -11,6 +12,7 @@ import {
 } from 'lucide-react';
 
 const Solutions = () => {
+  const navigate = useNavigate();
   const solutions = [
     {
       icon: <Sun className="w-8 h-8 text-harvest" />,
@@ -108,7 +110,7 @@ const Solutions = () => {
                     };
                     const route = routeMap[solution.title];
                     if (route) {
-                      window.location.href = route;
+                      navigate(route);
                     }
                   }}
                 >
