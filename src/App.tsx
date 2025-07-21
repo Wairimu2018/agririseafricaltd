@@ -12,6 +12,9 @@ import Layout from "./components/Layout";
 import SolarSmartIrrigation from "./pages/solutions/SolarSmartIrrigation";
 import PrecisionFarming from "./pages/solutions/PrecisionFarming";
 import FarmManagement from "./pages/solutions/FarmManagement";
+import SoilWeatherMonitoring from "./pages/solutions/SoilWeatherMonitoring";
+import AIDataAnalytics from "./pages/solutions/AIDataAnalytics";
+import SustainableAgTech from "./pages/solutions/SustainableAgTech";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +31,9 @@ const App = () => (
           <Route path="/solutions/solar-smart-irrigation" element={<SolarSmartIrrigation />} />
           <Route path="/solutions/precision-farming" element={<PrecisionFarming />} />
           <Route path="/solutions/farm-management" element={<FarmManagement />} />
+          <Route path="/solutions/soil-weather-monitoring" element={<SoilWeatherMonitoring />} />
+          <Route path="/solutions/ai-data-analytics" element={<AIDataAnalytics />} />
+          <Route path="/solutions/sustainable-agtech" element={<SustainableAgTech />} />
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
           <Route path="*" element={<NotFound />} />
         </Routes>

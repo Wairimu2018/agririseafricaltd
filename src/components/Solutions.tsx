@@ -106,7 +106,10 @@ const Solutions = () => {
                     const routeMap: Record<string, string> = {
                       'Solar Smart Irrigation': '/solutions/solar-smart-irrigation',
                       'Precision Farming Tools': '/solutions/precision-farming',
-                      'Farm Management Software': '/solutions/farm-management'
+                      'Farm Management Software': '/solutions/farm-management',
+                      'Soil & Weather Monitoring': '/solutions/soil-weather-monitoring',
+                      'AI & Data Analytics': '/solutions/ai-data-analytics',
+                      'Sustainable AgTech': '/solutions/sustainable-agtech'
                     };
                     const route = routeMap[solution.title];
                     if (route) {
