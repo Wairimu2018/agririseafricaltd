@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Gauge, Satellite, MapPin, Activity } from 'lucide-react';
+import { ArrowLeft, Gauge, Satellite, MapPin, Activity, Plane, Target, Map, Bug } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import precisionFarmingImage from '@/assets/precision-farming.jpg';
 
@@ -23,7 +23,7 @@ const PrecisionFarming = () => {
               Precision Farming Tools
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Advanced sensor networks and IoT devices that provide real-time monitoring of soil conditions, weather patterns, and crop health for data-driven farming decisions.
+              Transform your farming with cutting-edge precision agriculture technology. Our comprehensive suite includes drone imaging, variable rate applications, soil mapping, and predictive analytics to maximize yields while minimizing costs and environmental impact.
             </p>
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center space-x-2">
@@ -49,42 +49,94 @@ const PrecisionFarming = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <Card>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <Card className="group hover:shadow-lg transition-all duration-300">
             <CardHeader>
-              <Gauge className="w-8 h-8 text-primary mb-2" />
-              <CardTitle>Soil Moisture Sensors</CardTitle>
+              <Plane className="w-8 h-8 text-primary mb-2 group-hover:scale-110 transition-transform" />
+              <CardTitle>NDVI & Crop Health Imaging</CardTitle>
             </CardHeader>
             <CardContent>
               <CardDescription>
-                Wireless soil moisture sensors that provide real-time data on soil conditions across different field zones.
+                Advanced drone technology captures Normalized Difference Vegetation Index (NDVI) data for early detection of crop stress, pest damage, and nutrient deficiencies before they're visible to the naked eye.
               </CardDescription>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="group hover:shadow-lg transition-all duration-300">
             <CardHeader>
-              <Satellite className="w-8 h-8 text-earth mb-2" />
-              <CardTitle>Weather Monitoring</CardTitle>
+              <Target className="w-8 h-8 text-earth mb-2 group-hover:scale-110 transition-transform" />
+              <CardTitle>Variable Rate Technology</CardTitle>
             </CardHeader>
             <CardContent>
               <CardDescription>
-                Comprehensive weather stations that track temperature, humidity, wind speed, and precipitation patterns.
+                Smart application systems that precisely deliver water, fertilizers, and pesticides based on real-time field variability data from GPS and IoT sensors, reducing waste and maximizing efficiency.
               </CardDescription>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="group hover:shadow-lg transition-all duration-300">
             <CardHeader>
-              <MapPin className="w-8 h-8 text-harvest mb-2" />
-              <CardTitle>GPS-Guided Equipment</CardTitle>
+              <Map className="w-8 h-8 text-harvest mb-2 group-hover:scale-110 transition-transform" />
+              <CardTitle>Nutrient Mapping & Soil Analysis</CardTitle>
             </CardHeader>
             <CardContent>
               <CardDescription>
-                Precision guidance systems for tractors and farming equipment to optimize field operations and reduce overlap.
+                Combines detailed soil test data with GPS technology to create precise nutrient management zones, providing customized fertilizer recommendations for each area of your field.
               </CardDescription>
             </CardContent>
           </Card>
+
+          <Card className="group hover:shadow-lg transition-all duration-300">
+            <CardHeader>
+              <Bug className="w-8 h-8 text-primary mb-2 group-hover:scale-110 transition-transform" />
+              <CardTitle>Pest & Disease Prediction</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                AI-powered prediction models combined with our mobile scouting app help identify potential pest and disease threats before they impact your crops, enabling proactive treatment strategies.
+              </CardDescription>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="bg-muted/50 rounded-xl p-8 mb-16">
+          <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Complete Precision Agriculture System</h3>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h4 className="text-lg font-semibold text-foreground mb-4">Smart Monitoring & Analysis</h4>
+              <ul className="space-y-3">
+                <li className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
+                  <span className="text-muted-foreground">Real-time soil moisture and nutrient monitoring across field zones</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
+                  <span className="text-muted-foreground">Weather stations tracking temperature, humidity, and precipitation patterns</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
+                  <span className="text-muted-foreground">GPS-guided equipment for precise field operations and reduced overlap</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold text-foreground mb-4">Advanced Applications</h4>
+              <ul className="space-y-3">
+                <li className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-earth rounded-full mt-2"></div>
+                  <span className="text-muted-foreground">Drone-based crop health imaging and stress detection</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-earth rounded-full mt-2"></div>
+                  <span className="text-muted-foreground">Variable rate application of inputs based on field data</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-earth rounded-full mt-2"></div>
+                  <span className="text-muted-foreground">Mobile app for pest scouting and disease identification</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <div className="text-center">
