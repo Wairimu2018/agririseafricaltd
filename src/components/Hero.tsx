@@ -47,7 +47,12 @@ const Hero = () => {
                 Through sustainable farming and smart collaboration, we grow more than crops — we grow impact.
               </p>
               
-              <Button variant="outline" size="lg" className="bg-white/10 text-white border border-white/20 hover:bg-white/20 hover-lift">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="bg-white/10 text-white border border-white/20 hover:bg-white/20 hover-lift"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 Start growing with us
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -66,7 +71,12 @@ const Hero = () => {
               </div>
             </div>
 
-            <Button variant="outline" size="lg" className="bg-white/10 text-white border border-white/20 hover:bg-white/20 hover-lift animate-fade-in stagger-6">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="bg-white/10 text-white border border-white/20 hover:bg-white/20 hover-lift animate-fade-in stagger-6"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               Start growing with us
               <ChevronDown className="ml-2 h-4 w-4" />
             </Button>

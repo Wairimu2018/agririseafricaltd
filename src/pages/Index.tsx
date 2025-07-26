@@ -2,6 +2,7 @@ import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import Solutions from '@/components/Solutions';
 import Contact from '@/components/Contact';
+import { Toaster } from '@/components/ui/toaster';
 
 const Index = () => {
   return (
@@ -9,7 +10,10 @@ const Index = () => {
       <Navigation />
       <Hero />
       <Solutions />
-      <Contact />
+      <div id="contact">
+        <Contact />
+      </div>
+      <Toaster />
     </div>
   );
 };

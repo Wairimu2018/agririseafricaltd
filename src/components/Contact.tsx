@@ -13,6 +13,9 @@ import {
   Clock,
   Globe
 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+import LiveChat from './LiveChat';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -23,10 +26,52 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showChat, setShowChat] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    
+    try {
+      const { error } = await supabase
+        .from('contact_messages')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            company: formData.company,
+            phone: formData.phone,
+            message: formData.message
+          }
+        ]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Message sent successfully!",
+        description: "We'll get back to you as soon as possible."
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast({
+        title: "Error sending message",
+        description: "Please try again or contact us directly.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -104,7 +149,12 @@ const Contact = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   Get instant answers to your questions from our support team.
                 </p>
-                <Button variant="outline" size="sm" className="w-full">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => setShowChat(true)}
+                >
                   Start Chat
                 </Button>
               </CardContent>
@@ -190,9 +240,10 @@ const Contact = () => {
                   <Button 
                     type="submit" 
                     size="lg" 
-                    className="w-full bg-gradient-to-r from-primary to-primary-light hover:shadow-lg transition-all duration-300"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-primary to-primary-light hover:shadow-lg transition-all duration-300 disabled:opacity-50"
                   >
-                    Send Message
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                     <Send className="ml-2 w-5 h-5" />
                   </Button>
                 </form>
@@ -224,6 +275,9 @@ const Contact = () => {
           </CardContent>
         </Card>
       </div>
+      
+      {/* Live Chat Component */}
+      {showChat && <LiveChat onClose={() => setShowChat(false)} />}
     </section>
   );
 };
