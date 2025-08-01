@@ -125,7 +125,7 @@ Be helpful, knowledgeable about agriculture technology, and always professional.
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error('Error in ai-chat function:', error);
+    console.error('Error in send-support-message function:', error);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
