@@ -97,17 +97,19 @@ const LiveChat: React.FC<LiveChatProps> = ({ onClose }) => {
 
       setNewMessage('');
 
-      // Simulate agent response after a delay
-      setTimeout(() => {
-        const responses = [
-          "Thank you for your message! Our agricultural experts are reviewing your inquiry and will respond shortly.",
-          "Great question! Let me connect you with our technical team for detailed assistance.",
-          "I understand your farming needs. Our solutions team will provide you with customized recommendations.",
-          "Thanks for reaching out to AgriRise! We're here to help optimize your agricultural operations."
-        ];
-        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-        sendAgentMessage(randomResponse);
-      }, 2000);
+      // Get AI response
+      const { data, error: functionError } = await supabase.functions.invoke('ai-chat', {
+        body: {
+          message: newMessage.trim(),
+          sessionId: sessionId
+        }
+      });
+
+      if (functionError) {
+        console.error('Error calling AI function:', functionError);
+        // Fallback to a generic response
+        await sendAgentMessage("I apologize, but I'm having trouble processing your request right now. Our team will get back to you shortly.");
+      }
     } catch (error) {
       console.error('Error sending message:', error);
       toast({

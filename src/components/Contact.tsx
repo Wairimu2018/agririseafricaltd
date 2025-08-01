@@ -9,11 +9,8 @@ import {
   Phone, 
   MapPin, 
   Send,
-  MessageSquare,
-  Clock,
-  Globe
+  MessageSquare
 } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import LiveChat from './LiveChat';
 
@@ -33,35 +30,38 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
-      const { error } = await supabase
-        .from('contact_messages')
-        .insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            company: formData.company,
-            phone: formData.phone,
-            message: formData.message
-          }
-        ]);
-
-      if (error) throw error;
-
-      toast({
-        title: "Message sent successfully!",
-        description: "We'll get back to you as soon as possible."
+      const response = await fetch("https://<your-project-ref>.functions.supabase.co/send-support-message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          message: formData.message
+        })
       });
 
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        message: ''
-      });
+      if (response.ok) {
+        toast({
+          title: "Message sent successfully!",
+          description: "We'll get back to you as soon as possible."
+        });
+
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          phone: '',
+          message: ''
+        });
+      } else {
+        throw new Error("Request failed");
+      }
     } catch (error) {
       console.error('Error sending message:', error);
       toast({
@@ -92,7 +92,7 @@ const Contact = () => {
       icon: <Phone className="w-6 h-6 text-primary" />,
       title: "Call Us",
       content: "+254720355380",
-      subtitle: "Mon-Fri 9AM-6PM EST"
+      subtitle: "Mon-Fri 9AM-6PM"
     },
     {
       icon: <MapPin className="w-6 h-6 text-primary" />,
@@ -120,7 +120,7 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          {/* Contact Information */}
+          {/* Contact Info Cards */}
           <div className="space-y-6">
             {contactInfo.map((info, index) => (
               <Card key={index} className="border-border/50 hover:border-primary/30 transition-all duration-300">
@@ -138,8 +138,7 @@ const Contact = () => {
                 </CardContent>
               </Card>
             ))}
-
-            {/* Additional Info */}
+            {/* Chat */}
             <Card className="bg-gradient-to-br from-primary/5 to-accent/10 border-primary/20">
               <CardContent className="p-6">
                 <div className="flex items-center space-x-3 mb-4">
@@ -275,8 +274,7 @@ const Contact = () => {
           </CardContent>
         </Card>
       </div>
-      
-      {/* Live Chat Component */}
+
       {showChat && <LiveChat onClose={() => setShowChat(false)} />}
     </section>
   );
