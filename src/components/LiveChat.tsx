@@ -98,7 +98,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ onClose }) => {
       setNewMessage('');
 
       // Get AI response
-      const { data, error: functionError } = await supabase.functions.invoke('ai-chat', {
+      const { data, error: functionError } = await supabase.functions.invoke('send-support-message', {
         body: {
           message: newMessage.trim(),
           sessionId: sessionId
