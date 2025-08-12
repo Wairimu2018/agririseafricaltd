@@ -253,8 +253,15 @@ const Products = () => {
                   <p className="text-muted-foreground text-sm mb-4">{product.description}</p>
                   <div className="flex justify-between items-center">
                     <span className="text-2xl font-bold text-primary">{product.price}</span>
-                    <Button variant={product.inStock ? "nature" : "outline"} disabled={!product.inStock}>
-                      {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                    <Button 
+                      variant={product.inStock ? "nature" : "outline"} 
+                      disabled={!product.inStock}
+                      onClick={() => {
+                        const message = `Hi! I'm interested in the ${product.name} (${product.price}). Can you provide more details?`;
+                        window.open(`https://wa.me/254720355380?text=${encodeURIComponent(message)}`, '_blank');
+                      }}
+                    >
+                      {product.inStock ? 'Shop Now' : 'Notify Me'}
                     </Button>
                   </div>
                 </CardContent>
@@ -326,14 +333,17 @@ const Products = () => {
 
                   <div className="flex justify-between items-center">
                     <span className="text-2xl font-bold text-primary">{product.price}</span>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
-                        Details
-                      </Button>
-                      <Button variant={product.inStock ? "nature" : "outline"} size="sm" disabled={!product.inStock}>
-                        {product.inStock ? 'Add to Cart' : 'Notify Me'}
-                      </Button>
-                    </div>
+                    <Button 
+                      variant={product.inStock ? "nature" : "outline"} 
+                      size="sm" 
+                      disabled={!product.inStock}
+                      onClick={() => {
+                        const message = `Hi! I'm interested in the ${product.name} (${product.price}). Can you provide more details?`;
+                        window.open(`https://wa.me/254720355380?text=${encodeURIComponent(message)}`, '_blank');
+                      }}
+                    >
+                      {product.inStock ? 'Shop Now' : 'Notify Me'}
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
