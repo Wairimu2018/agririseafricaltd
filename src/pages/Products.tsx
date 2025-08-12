@@ -28,7 +28,7 @@ const Products = () => {
       image: '/api/placeholder/400/300',
       rating: 4.9,
       reviews: 127,
-      description: "Our flagship solar pump that's been a game-changer for medium-sized farms. Jake from Texas says it cut his irrigation costs by 70% while increasing his crop yields.",
+      description: "Our flagship solar pump that's been a game-changer for medium-sized farms. James from Laikipia says it cut his irrigation costs by 70% while increasing his crop yields.",
       features: [
         'Pays for itself in under 18 months through energy savings',
         'Monitor and control from your smartphone anywhere',
@@ -55,7 +55,7 @@ const Products = () => {
       image: '/api/placeholder/400/300',
       rating: 4.7,
       reviews: 89,
-      description: "Perfect for smaller operations and hobby farms. Maria from California loves how easy it was to set up for her organic vegetable garden - no electrician needed!",
+      description: "Perfect for smaller operations and hobby farms. Maria from Naivasha loves how easy it was to set up for her organic vegetable garden - no electrician needed!",
       features: [
         'Set up in under 2 hours with basic tools',
         'Weatherproof design survives harsh conditions',
