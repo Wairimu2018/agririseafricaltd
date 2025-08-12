@@ -6,6 +6,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Solutions from "./pages/Solutions";
+import Products from "./pages/Products";
 import Contact from "./components/Contact";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/solutions" element={<Solutions />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/solutions/solar-smart-irrigation" element={<SolarSmartIrrigation />} />
           <Route path="/solutions/precision-farming" element={<PrecisionFarming />} />
           <Route path="/solutions/farm-management" element={<FarmManagement />} />
