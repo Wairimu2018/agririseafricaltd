@@ -359,14 +359,14 @@ const Products = () => {
           <p className="text-xl mb-8 opacity-90">
             Every operation is unique. Let's talk about your specific needs and find equipment that actually makes sense for your situation.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="outline" className="bg-white text-primary hover:bg-white/90">
               Talk to a Real Farmer
             </Button>
             <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white/10">
               See All Specs & Pricing
             </Button>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>
