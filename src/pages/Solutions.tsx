@@ -2,6 +2,7 @@ import Navigation from '@/components/Navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useNavigate } from 'react-router-dom';
 import { 
   Cpu, 
   Smartphone, 
@@ -16,10 +17,11 @@ import {
   Sun,
   Droplets
 } from 'lucide-react';
-import precisionImage from '@/assets/precision-farming.jpg';
+import precisionImage from '@/assets/precision-farming.jpg'
 import solarImage from '@/assets/solar-irrigation.jpg';
 
 const Solutions = () => {
+  const navigate = useNavigate();
   const solutions = [
     {
       icon: <Sun className="w-8 h-8 text-harvest" />,
@@ -27,7 +29,7 @@ const Solutions = () => {
       description: "Solar-powered irrigation systems with AI-driven water management, reducing energy costs by 80% while optimizing crop hydration.",
       features: ["Solar panel integration", "Smart water sensors", "Automated scheduling", "Weather-based adjustments", "Remote monitoring"],
       benefits: ["80% energy savings", "40% water conservation", "Zero carbon footprint", "24/7 operation"],
-      price: "Starting at $349/month",
+      price: "Starting at $0.5/month",
       popular: true
     },
     {
@@ -36,7 +38,7 @@ const Solutions = () => {
       description: "Advanced sensors and IoT devices for real-time monitoring of soil conditions, weather patterns, and crop health.",
       features: ["Soil moisture sensors", "Weather monitoring stations", "GPS-guided equipment", "Crop health imaging"],
       benefits: ["30% water savings", "25% yield increase", "Real-time alerts"],
-      price: "Starting at $299/month",
+      price: "Starting at $2/month",
       popular: false
     },
     {
@@ -45,7 +47,7 @@ const Solutions = () => {
       description: "Comprehensive platform to manage operations, track resources, and optimize farm productivity from anywhere.",
       features: ["Resource planning", "Inventory management", "Mobile accessibility", "Team collaboration"],
       benefits: ["50% time savings", "Improved efficiency", "Cost tracking"],
-      price: "Starting at $199/month",
+      price: "Starting at $0.5/month",
       popular: true
     },
     {
@@ -54,7 +56,7 @@ const Solutions = () => {
       description: "24/7 environmental monitoring with predictive analytics to help you make informed farming decisions.",
       features: ["Real-time alerts", "Historical data", "Weather forecasting", "Soil analysis"],
       benefits: ["Prevent crop loss", "Optimize irrigation", "Plan harvests"],
-      price: "Starting at $149/month",
+      price: "Starting at $0.5/month",
       popular: false
     },
     {
@@ -63,7 +65,7 @@ const Solutions = () => {
       description: "Machine learning algorithms that analyze your farm data to provide actionable insights and recommendations.",
       features: ["Yield prediction", "Disease detection", "Optimization algorithms", "Custom reports"],
       benefits: ["Predictive insights", "Early problem detection", "Data-driven decisions"],
-      price: "Starting at $399/month",
+      price: "Starting at $1/month",
       popular: false
     },
     {
@@ -72,7 +74,7 @@ const Solutions = () => {
       description: "Eco-friendly solutions that reduce environmental impact while maximizing productivity and profitability.",
       features: ["Carbon footprint tracking", "Water conservation", "Organic farming support", "Sustainability reporting"],
       benefits: ["Reduce environmental impact", "Meet sustainability goals", "Access green incentives"],
-      price: "Starting at $249/month",
+      price: "Starting at $2/month",
       popular: false
     }
   ];
@@ -143,8 +145,12 @@ const Solutions = () => {
                   <CheckCircle className="w-5 h-5 text-primary" />
                   <span className="text-foreground">80% reduction in energy costs</span>
                 </div>
-              </div>
-              <Button variant="nature" size="lg">
+                </div>
+              <Button 
+                variant="nature" 
+                size="lg"
+                onClick={() => navigate('/solutions/solar-smart-irrigation')}
+              >
                 Learn More
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>

@@ -88,7 +88,11 @@ const SolarSmartIrrigation = () => {
         </div>
 
         <div className="text-center">
-          <Button size="lg" className="bg-gradient-to-r from-harvest to-primary">
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-harvest to-primary"
+            onClick={() => window.location.href = '/#contact'}
+          >
             Request Consultation
           </Button>
         </div>

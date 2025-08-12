@@ -140,7 +140,11 @@ const PrecisionFarming = () => {
         </div>
 
         <div className="text-center">
-          <Button size="lg" className="bg-gradient-to-r from-primary to-earth">
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-primary to-earth"
+            onClick={() => window.location.href = '/#contact'}
+          >
             Request Consultation
           </Button>
         </div>

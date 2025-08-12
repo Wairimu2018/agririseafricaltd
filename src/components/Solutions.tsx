@@ -126,7 +126,11 @@ const Solutions = () => {
         </div>
 
         <div className="text-center">
-          <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light shadow-lg">
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-primary to-primary-light shadow-lg"
+            onClick={() => navigate('/solutions')}
+          >
             Explore All Solutions
             <ArrowRight className="ml-2 w-5 h-5" />
           </Button>

@@ -48,14 +48,15 @@ const Navigation = () => {
                 {item.name}
               </Link>
             ))}
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="border-forest-medium/30 text-forest-medium hover:bg-forest-medium/10 px-6"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Let's work together
-            </Button>
+            <Link to="/contact">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="border-forest-medium/30 text-forest-medium hover:bg-forest-medium/10 px-6"
+              >
+                Let's work together
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -84,14 +85,15 @@ const Navigation = () => {
                 </Link>
               ))}
               <div className="px-3 py-2">
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full border-forest-medium/30 text-forest-medium hover:bg-forest-medium/10"
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  Let's work together
-                </Button>
+                <Link to="/contact" onClick={() => setIsOpen(false)}>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full border-forest-medium/30 text-forest-medium hover:bg-forest-medium/10"
+                  >
+                    Let's work together
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

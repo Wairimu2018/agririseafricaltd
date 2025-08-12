@@ -182,7 +182,11 @@ const About = () => {
             collaborating on sustainable agriculture solutions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="nature" size="lg">
+            <Button 
+              variant="nature" 
+              size="lg"
+              onClick={() => window.location.href = '/#contact'}
+            >
               Partner With Us
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
