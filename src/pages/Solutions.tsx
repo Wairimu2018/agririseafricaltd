@@ -238,6 +238,7 @@ const Solutions = () => {
                       variant={solution.popular ? "default" : "outline"}
                       size="sm" 
                       className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300"
+                      onClick={() => window.open(`https://wa.me/254701234567?text=Hi! I am interested in learning more about ${solution.title}. Could you provide more details about pricing and implementation?`, '_blank')}
                     >
                       Get Started
                       <ArrowRight className="ml-2 w-4 h-4" />

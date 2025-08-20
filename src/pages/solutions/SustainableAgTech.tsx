@@ -276,7 +276,11 @@ const SustainableAgTech = () => {
                     </div>
                   ))}
                 </div>
-                <Button className="mt-8" size="lg">
+                <Button 
+                  className="mt-8" 
+                  size="lg"
+                  onClick={() => window.open("https://wa.me/254701234567?text=Hi! I am interested in learning more about your Sustainable AgTech Solutions. Could you provide more details about implementation and pricing?", "_blank")}
+                >
                   Get Started Today
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
