@@ -264,18 +264,33 @@ const Products = () => {
                   </div>
                   <CardTitle className="mb-2">{product.name}</CardTitle>
                   <p className="text-muted-foreground text-sm mb-4">{product.description}</p>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center mb-4">
                     <span className="text-2xl font-bold text-primary">{product.price}</span>
+                  </div>
+                  <div className="flex gap-2">
                     <Button 
                       variant={product.inStock ? "nature" : "outline"} 
                       disabled={!product.inStock}
                       onClick={() => {
-                        const message = `Hi! I'm interested in the ${product.name} (${product.price}). Can you provide more details?`;
+                        const message = `Hi! I'm interested in the ${product.name} (${product.price}). Can you provide more details about full payment?`;
                         window.open(`https://wa.me/254720355380?text=${encodeURIComponent(message)}`, '_blank');
                       }}
+                      className="flex-1"
                     >
-                      {product.inStock ? 'Shop Now' : 'Notify Me'}
+                      {product.inStock ? 'Buy Now' : 'Notify Me'}
                     </Button>
+                    {product.inStock && (
+                      <Button 
+                        variant="outline"
+                        onClick={() => {
+                          const message = `Hi! I'm interested in the ${product.name} (${product.price}) with monthly payment plan. Can you provide installment options?`;
+                          window.open(`https://wa.me/254720355380?text=${encodeURIComponent(message)}`, '_blank');
+                        }}
+                        className="flex-1"
+                      >
+                        Pay Monthly
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -344,19 +359,35 @@ const Products = () => {
                     </ul>
                   </div>
 
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center mb-4">
                     <span className="text-2xl font-bold text-primary">{product.price}</span>
+                  </div>
+                  <div className="flex gap-2">
                     <Button 
                       variant={product.inStock ? "nature" : "outline"} 
                       size="sm" 
                       disabled={!product.inStock}
                       onClick={() => {
-                        const message = `Hi! I'm interested in the ${product.name} (${product.price}). Can you provide more details?`;
+                        const message = `Hi! I'm interested in the ${product.name} (${product.price}). Can you provide more details about full payment?`;
                         window.open(`https://wa.me/254720355380?text=${encodeURIComponent(message)}`, '_blank');
                       }}
+                      className="flex-1"
                     >
-                      {product.inStock ? 'Shop Now' : 'Notify Me'}
+                      {product.inStock ? 'Buy Now' : 'Notify Me'}
                     </Button>
+                    {product.inStock && (
+                      <Button 
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          const message = `Hi! I'm interested in the ${product.name} (${product.price}) with monthly payment plan. Can you provide installment options?`;
+                          window.open(`https://wa.me/254720355380?text=${encodeURIComponent(message)}`, '_blank');
+                        }}
+                        className="flex-1"
+                      >
+                        Pay Monthly
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>
