@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import Navigation from '@/components/Navigation';
+import ConsultationForm from '@/components/ConsultationForm';
 import { 
   Droplets, 
   Zap, 
@@ -18,6 +20,7 @@ import {
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
 
   const products = [
     {
@@ -217,10 +220,20 @@ const Products = () => {
                 <ShoppingCart className="mr-2 w-5 h-5" />
                 Shop All Products
               </Button>
-              <Button size="lg" variant="outline">
-                <Info className="mr-2 w-5 h-5" />
-                Request Consultation
-              </Button>
+              <Dialog open={isConsultationOpen} onOpenChange={setIsConsultationOpen}>
+                <DialogTrigger asChild>
+                  <Button size="lg" variant="outline">
+                    <Info className="mr-2 w-5 h-5" />
+                    Request Consultation
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle>Request Agricultural Technology Consultation</DialogTitle>
+                  </DialogHeader>
+                  <ConsultationForm onClose={() => setIsConsultationOpen(false)} />
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>
