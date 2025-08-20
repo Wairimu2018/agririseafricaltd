@@ -219,6 +219,7 @@ const Products = () => {
               <Button size="lg" variant="nature">
                 <ShoppingCart className="mr-2 w-5 h-5" />
                 Shop All Products
+                           Shop All Products
               </Button>
               <Dialog open={isConsultationOpen} onOpenChange={setIsConsultationOpen}>
                 <DialogTrigger asChild>
