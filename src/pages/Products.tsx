@@ -23,8 +23,8 @@ import solarPumpImage from '@/assets/Solar_pump.jpg';
 import soilMonitoringImage from '@/assets/SoilMonitoring.jpg';
 import solarCompactImage from '@/assets/Solar_Compact.avif';
 import solarIrrigationImage from '@/assets/solar-irrigation.jpg';
-import DroneScoutImage from '@/assets/Drone.jpeg'
-import aerialFarmImage from '@/assets/aerial-farm-hero.jpg';
+import droneScoutImage from '@/assets/Drone.jpeg'
+import weatherStationImage from '@/assets/aerial-farm-hero.jpg';
 
 
 const Products = () => {
@@ -118,7 +118,7 @@ const Products = () => {
       name: 'WeatherStation Elite',
       category: 'monitoring',
       price: '$799',
-      image: aerialFarmImage,
+      image: weatherStationImage,
       rating: 4.9,
       reviews: 156,
       description: "Weather can make or break your season. This station gives you hyperlocal forecasts that are often more accurate than the weather service for your specific field conditions.",
@@ -172,7 +172,7 @@ const Products = () => {
       name: 'DroneScout Agricultural Drone',
       category: 'precision-tech',
       price: '$12,999',
-      image: DroneScoutImage,
+      image: droneScoutImage,
       rating: 4.8,
       reviews: 67,
       description: "See your fields like never before. This professional drone spots problems before they spread, maps your land with incredible detail, and can even handle targeted spraying.",
