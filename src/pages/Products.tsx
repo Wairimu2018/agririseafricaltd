@@ -20,9 +20,11 @@ import {
 
 // Import product images
 import solarPumpImage from '@/assets/Solar_pump.jpg';
+import soilMonitoringImage from '@/assets/SoilMonitoring.jpg';
 import precisionFarmingImage from '@/assets/precision-farming.jpg';
 import solarIrrigationImage from '@/assets/solar-irrigation.jpg';
 import aerialFarmImage from '@/assets/aerial-farm-hero.jpg';
+
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
