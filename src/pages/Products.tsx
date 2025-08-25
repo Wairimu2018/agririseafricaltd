@@ -28,7 +28,7 @@ const Products = () => {
       name: 'SolarPump Pro X1',
       category: 'solar-pumps',
       price: '$2,499',
-      image: '/api/placeholder/400/300',
+      image: "/assets/Solar_pump.jpg",
       rating: 4.9,
       reviews: 127,
       description: "Our flagship solar pump that's been a game-changer for medium-sized farms. James from Laikipia says it cut his irrigation costs by 70% while increasing his crop yields.",
