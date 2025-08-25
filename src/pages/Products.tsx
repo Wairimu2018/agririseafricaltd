@@ -21,7 +21,7 @@ import {
 // Import product images
 import solarPumpImage from '@/assets/Solar_pump.jpg';
 import soilMonitoringImage from '@/assets/SoilMonitoring.jpg';
-import precisionFarmingImage from '@/assets/precision-farming.jpg';
+import solarCompactImage from '@/assets/Solar_Compact.avif';
 import solarIrrigationImage from '@/assets/solar-irrigation.jpg';
 import aerialFarmImage from '@/assets/aerial-farm-hero.jpg';
 
@@ -63,7 +63,7 @@ const Products = () => {
       name: 'SolarPump Compact S2',
       category: 'solar-pumps',
       price: '$1,299',
-      image: soilMonitoringImage,
+      image: solarCompactImage,
       rating: 4.7,
       reviews: 89,
       description: "Perfect for smaller operations and hobby farms. Maria from Naivasha loves how easy it was to set up for her organic vegetable garden - no electrician needed!",
@@ -90,7 +90,7 @@ const Products = () => {
       name: 'SmartSoil Monitor Pro',
       category: 'monitoring',
       price: '$399',
-      image: precisionFarmingImage,
+      image: soilMonitoringImage,
       rating: 4.8,
       reviews: 203,
       description: "Stop guessing about your soil conditions. This system tells you exactly what's happening underground, 24/7. Corn farmers report 15% yield increases just from better timing their irrigation.",
