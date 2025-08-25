@@ -61,7 +61,7 @@ const Products = () => {
       name: 'SolarPump Compact S2',
       category: 'solar-pumps',
       price: '$1,299',
-      image: solarIrrigationImage,
+      image: soilMonitoringImage,
       rating: 4.7,
       reviews: 89,
       description: "Perfect for smaller operations and hobby farms. Maria from Naivasha loves how easy it was to set up for her organic vegetable garden - no electrician needed!",
