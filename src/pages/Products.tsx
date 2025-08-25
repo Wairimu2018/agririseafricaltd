@@ -18,6 +18,12 @@ import {
   Info
 } from 'lucide-react';
 
+// Import product images
+import solarPumpImage from '@/assets/Solar_pump.jpg';
+import precisionFarmingImage from '@/assets/precision-farming.jpg';
+import solarIrrigationImage from '@/assets/solar-irrigation.jpg';
+import aerialFarmImage from '@/assets/aerial-farm-hero.jpg';
+
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
@@ -28,7 +34,7 @@ const Products = () => {
       name: 'SolarPump Pro X1',
       category: 'solar-pumps',
       price: '$2,499',
-      image: "/assets/Solar_pump.jpg",
+      image: solarPumpImage,
       rating: 4.9,
       reviews: 127,
       description: "Our flagship solar pump that's been a game-changer for medium-sized farms. James from Laikipia says it cut his irrigation costs by 70% while increasing his crop yields.",
@@ -55,7 +61,7 @@ const Products = () => {
       name: 'SolarPump Compact S2',
       category: 'solar-pumps',
       price: '$1,299',
-      image: '/api/placeholder/400/300',
+      image: solarIrrigationImage,
       rating: 4.7,
       reviews: 89,
       description: "Perfect for smaller operations and hobby farms. Maria from Naivasha loves how easy it was to set up for her organic vegetable garden - no electrician needed!",
@@ -82,7 +88,7 @@ const Products = () => {
       name: 'SmartSoil Monitor Pro',
       category: 'monitoring',
       price: '$399',
-      image: '/api/placeholder/400/300',
+      image: precisionFarmingImage,
       rating: 4.8,
       reviews: 203,
       description: "Stop guessing about your soil conditions. This system tells you exactly what's happening underground, 24/7. Corn farmers report 15% yield increases just from better timing their irrigation.",
@@ -109,7 +115,7 @@ const Products = () => {
       name: 'WeatherStation Elite',
       category: 'monitoring',
       price: '$799',
-      image: '/api/placeholder/400/300',
+      image: aerialFarmImage,
       rating: 4.9,
       reviews: 156,
       description: "Weather can make or break your season. This station gives you hyperlocal forecasts that are often more accurate than the weather service for your specific field conditions.",
@@ -136,7 +142,7 @@ const Products = () => {
       name: 'AutoIrrigate Controller',
       category: 'irrigation',
       price: '$599',
-      image: '/api/placeholder/400/300',
+      image: solarIrrigationImage,
       rating: 4.6,
       reviews: 94,
       description: "This smart controller learns your crops' needs and waters them perfectly, even when you're not around. Customers typically see 30-40% water savings in the first year.",
@@ -163,7 +169,7 @@ const Products = () => {
       name: 'DroneScout Agricultural Drone',
       category: 'precision-tech',
       price: '$12,999',
-      image: '/api/placeholder/400/300',
+      image: aerialFarmImage,
       rating: 4.8,
       reviews: 67,
       description: "See your fields like never before. This professional drone spots problems before they spread, maps your land with incredible detail, and can even handle targeted spraying.",
@@ -249,8 +255,12 @@ const Products = () => {
             {featuredProducts.map((product) => (
               <Card key={product.id} className="group hover:shadow-lg transition-all duration-300">
                 <CardHeader className="p-0">
-                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary-light/30 rounded-t-lg flex items-center justify-center">
-                    <Droplets className="w-16 h-16 text-primary opacity-60" />
+                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary-light/30 rounded-t-lg overflow-hidden">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
                 </CardHeader>
                 <CardContent className="p-6">
@@ -328,8 +338,12 @@ const Products = () => {
             {filteredProducts.map((product) => (
               <Card key={product.id} className="group hover:shadow-lg transition-all duration-300">
                 <CardHeader className="p-0">
-                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary-light/30 rounded-t-lg flex items-center justify-center relative">
-                    <Droplets className="w-16 h-16 text-primary opacity-60" />
+                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary-light/30 rounded-t-lg overflow-hidden relative">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
                     {!product.inStock && (
                       <Badge variant="destructive" className="absolute top-2 right-2">
                         Out of Stock
