@@ -23,6 +23,7 @@ import solarPumpImage from '@/assets/Solar_pump.jpg';
 import soilMonitoringImage from '@/assets/SoilMonitoring.jpg';
 import solarCompactImage from '@/assets/Solar_Compact.avif';
 import solarIrrigationImage from '@/assets/solar-irrigation.jpg';
+import DroneScoutImage from '@/assets/Drone.jpeg'
 import aerialFarmImage from '@/assets/aerial-farm-hero.jpg';
 
 
@@ -171,7 +172,7 @@ const Products = () => {
       name: 'DroneScout Agricultural Drone',
       category: 'precision-tech',
       price: '$12,999',
-      image: aerialFarmImage,
+      image: DroneScoutImage,
       rating: 4.8,
       reviews: 67,
       description: "See your fields like never before. This professional drone spots problems before they spread, maps your land with incredible detail, and can even handle targeted spraying.",
