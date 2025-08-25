@@ -24,7 +24,7 @@ import soilMonitoringImage from '@/assets/SoilMonitoring.jpg';
 import solarCompactImage from '@/assets/Solar_Compact.avif';
 import solarIrrigationImage from '@/assets/solar-irrigation.jpg';
 import droneScoutImage from '@/assets/Drone.jpeg'
-import weatherStationImage from '@/assets/aerial-farm-hero.jpg';
+import weatherStationImage from '@/assets/Weather_Station.jpg';
 
 
 const Products = () => {
@@ -200,7 +200,7 @@ const Products = () => {
     { id: 'all', name: 'All Products', icon: Gauge },
     { id: 'solar-pumps', name: 'Solar Pumps', icon: Droplets },
     { id: 'monitoring', name: 'Monitoring Systems', icon: Thermometer },
-    { id: 'irrigation', name: 'Irrigation Control', icon: Zap },
+    { id: 'weather', name: 'Weather Station', icon: Zap },
     { id: 'precision-tech', name: 'Precision Tech', icon: Wifi }
   ];
 
