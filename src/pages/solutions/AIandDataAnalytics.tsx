@@ -15,35 +15,41 @@ import {
   Activity,
   Cpu,
   CheckCircle,
-  ArrowRight
+  ArrowRight,
+  Satellite,
+  CloudRain,
+  Leaf,
+  MapPin,
+  Globe,
+  AlertTriangle
 } from 'lucide-react';
 
 const AIDataAnalytics = () => {
   const capabilities = [
     {
-      icon: <Brain className="w-6 h-6 text-primary" />,
-      title: "Machine Learning Models",
-      description: "Advanced algorithms trained on millions of agricultural data points"
+      icon: <Satellite className="w-6 h-6 text-primary" />,
+      title: "Satellite Imagery Analytics",
+      description: "Monitor fields from space with high-resolution satellite data for comprehensive crop insights"
     },
     {
       icon: <Eye className="w-6 h-6 text-primary" />,
-      title: "Computer Vision",
-      description: "Automated crop health assessment and disease detection from imagery"
+      title: "Crop Health Monitoring",
+      description: "Real-time assessment of crop stress, disease detection, and growth stage analysis"
     },
     {
       icon: <TrendingUp className="w-6 h-6 text-primary" />,
-      title: "Predictive Analytics",
-      description: "Forecast yields, weather impacts, and optimal harvest timing"
+      title: "Yield Prediction",
+      description: "ML-powered yield estimation and harvest date forecasting with 95% accuracy"
     },
     {
-      icon: <Target className="w-6 h-6 text-primary" />,
-      title: "Precision Recommendations",
-      description: "Field-specific advice for fertilization, irrigation, and pest control"
+      icon: <CloudRain className="w-6 h-6 text-primary" />,
+      title: "Weather Integration",
+      description: "Real-time weather data and extreme event alerts for proactive farm management"
     },
     {
-      icon: <BarChart3 className="w-6 h-6 text-primary" />,
-      title: "Data Integration",
-      description: "Combine sensor data, weather, soil tests, and satellite imagery"
+      icon: <Brain className="w-6 h-6 text-primary" />,
+      title: "Machine Learning Models",
+      description: "Advanced algorithms trained on millions of agricultural data points"
     },
     {
       icon: <Zap className="w-6 h-6 text-primary" />,
@@ -52,67 +58,145 @@ const AIDataAnalytics = () => {
     }
   ];
 
+  const fieldWiseFeatures = [
+    {
+      icon: <Globe className="w-8 h-8 text-primary" />,
+      title: "Monitor Fields From Space",
+      description: "Get accurate insights from satellite imagery, machine learning predictive models, and weather data to make the right decisions at the right time.",
+      highlights: ["Multi-spectral imagery analysis", "NDVI vegetation indices", "Temporal change detection"]
+    },
+    {
+      icon: <Leaf className="w-8 h-8 text-primary" />,
+      title: "Crop Health Intelligence",
+      description: "Advanced remote sensing technology detects crop stress, nutrient deficiencies, and disease outbreaks before they're visible to the naked eye.",
+      highlights: ["Early stress detection", "Nutrient deficiency mapping", "Disease outbreak alerts"]
+    },
+    {
+      icon: <MapPin className="w-8 h-8 text-primary" />,
+      title: "Geo-Tagged Farm Management",
+      description: "Unified farmer databases with geo-tagged farms enable precise field-level monitoring and state-wide agricultural insights.",
+      highlights: ["Field boundary mapping", "Zone-based analytics", "Historical comparison"]
+    },
+    {
+      icon: <AlertTriangle className="w-8 h-8 text-primary" />,
+      title: "Extreme Events & Alerts",
+      description: "Receive real-time alerts for weather extremes, pest invasions, and market conditions with automated impact assessment.",
+      highlights: ["Weather event alerts", "Crop loss assessment", "Risk mitigation guidance"]
+    }
+  ];
+
   const useCases = [
     {
-      title: "Yield Prediction",
-      description: "Predict harvest yields with 95% accuracy up to 30 days in advance",
-      features: ["Historical yield analysis", "Weather correlation modeling", "Crop stage monitoring", "Market planning optimization"]
+      title: "Yield Prediction & Harvest Planning",
+      description: "Receive inputs on estimated yield and harvest dates powered by satellite analytics and ML models",
+      features: ["Satellite-based crop monitoring", "Weather correlation modeling", "Harvest date estimation", "Market planning optimization"]
     },
     {
-      title: "Disease Detection",
-      description: "Identify crop diseases and pests before they become visible to the naked eye",
-      features: ["Computer vision analysis", "Early warning systems", "Treatment recommendations", "Spread prevention strategies"]
+      title: "Crop Health & Disease Detection",
+      description: "Monitor crop health and stress levels across your entire farm using remote sensing technology",
+      features: ["Multi-spectral image analysis", "Early warning systems", "Treatment recommendations", "Spread prevention strategies"]
     },
     {
-      title: "Resource Optimization",
-      description: "Maximize efficiency of water, fertilizer, and energy usage across your farm",
-      features: ["Input cost reduction", "Environmental impact assessment", "ROI optimization", "Sustainability metrics"]
+      title: "Insurance & Risk Assessment",
+      description: "Make informed investments with climate and farm analytics for accurate risk assessment and crop loss monitoring",
+      features: ["Crop sown & harvested tracking", "Remote sensing loss assessment", "Farm productivity data", "Yield estimation reports"]
     }
   ];
 
   const metrics = [
-    { label: "Accuracy Rate", value: "95%", icon: <Target className="w-6 h-6 text-primary" /> },
+    { label: "Prediction Accuracy", value: "95%", icon: <Target className="w-6 h-6 text-primary" /> },
     { label: "Cost Reduction", value: "30%", icon: <TrendingUp className="w-6 h-6 text-earth" /> },
-    { label: "Data Points", value: "10M+", icon: <BarChart3 className="w-6 h-6 text-harvest" /> },
-    { label: "Processing Speed", value: "<1s", icon: <Zap className="w-6 h-6 text-primary" /> }
+    { label: "Satellite Data Points", value: "50M+", icon: <Satellite className="w-6 h-6 text-harvest" /> },
+    { label: "Alert Response", value: "<1hr", icon: <Zap className="w-6 h-6 text-primary" /> }
   ];
 
   const benefits = [
-    "Increase crop yields by up to 25% through optimized farming practices",
-    "Reduce input costs by 30% with precise resource allocation",
-    "Detect diseases 2-3 weeks earlier than traditional methods",
-    "Minimize crop losses with predictive weather impact modeling",
-    "Automate decision-making for routine farming operations",
-    "Generate detailed reports for compliance and certification"
+    "Monitor crop health across state-wide regions using satellite imagery",
+    "Receive recommendations on suitable seeds and optimal sowing windows",
+    "Get agronomy and input recommendations for better crop growth",
+    "Receive alerts and advisory for enhanced crop protection",
+    "Access market linkage and price forecasts for better revenue planning",
+    "Automated crop loss assessment via advanced remote sensing"
   ];
 
   return (
     <Layout>
       <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
         {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-r from-primary/10 to-accent/10">
-          <div className="container mx-auto px-4">
+        <section className="py-20 bg-gradient-to-r from-primary/10 to-accent/10 relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-20 left-10 w-32 h-32 border-2 border-primary rounded-full animate-pulse"></div>
+            <div className="absolute bottom-20 right-20 w-48 h-48 border border-primary/50 rounded-full"></div>
+            <div className="absolute top-40 right-40 w-16 h-16 bg-primary/20 rounded-lg rotate-45"></div>
+          </div>
+          <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <Badge variant="outline" className="mb-4 text-primary border-primary">
-                Artificial Intelligence
+                Powered by fieldWISE Technology
               </Badge>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-                AI & Data
+                AI & Satellite
                 <span className="block text-primary">Analytics Platform</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-                Harness the power of artificial intelligence and machine learning to transform 
-                your farm data into actionable insights. Make smarter decisions with predictive 
-                analytics and automated recommendations.
+                Transform your farming with satellite imagery, machine learning predictive models, 
+                and real-time weather data. Monitor fields from space and make data-driven 
+                decisions at the right time.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
-                  Try AI Analytics
+                  <Satellite className="mr-2 w-5 h-5" />
+                  Start Satellite Monitoring
                 </Button>
                 <Button variant="outline" size="lg">
                   Watch Demo
                 </Button>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* fieldWISE Technology Section */}
+        <section className="py-20 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <Badge variant="secondary" className="mb-4">
+                fieldWISE Integration
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Transforming Farms with Space Technology
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Our platform integrates cutting-edge satellite imagery and AI to revolutionize 
+                agriculture with sustainability, financial inclusion, and enhanced food security.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {fieldWiseFeatures.map((feature, index) => (
+                <Card key={index} className="hover:shadow-xl transition-all duration-300 group border-l-4 border-l-primary">
+                  <CardHeader>
+                    <div className="flex items-start gap-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                        {feature.icon}
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl mb-2">{feature.title}</CardTitle>
+                        <CardDescription className="text-base">{feature.description}</CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {feature.highlights.map((highlight, idx) => (
+                        <Badge key={idx} variant="secondary" className="text-xs">
+                          {highlight}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -125,7 +209,7 @@ const AIDataAnalytics = () => {
                 AI-Powered Capabilities
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Advanced artificial intelligence tools designed specifically for modern agriculture
+                Advanced artificial intelligence and satellite technology designed for modern agriculture
               </p>
             </div>
             
@@ -153,22 +237,27 @@ const AIDataAnalytics = () => {
                 Real-World Applications
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                See how our AI solutions solve common agricultural challenges
+                See how satellite analytics and AI solve critical agricultural challenges
               </p>
             </div>
 
             <Tabs defaultValue="yield" className="max-w-4xl mx-auto">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="yield">Yield Prediction</TabsTrigger>
-                <TabsTrigger value="disease">Disease Detection</TabsTrigger>
-                <TabsTrigger value="optimization">Resource Optimization</TabsTrigger>
+                <TabsTrigger value="health">Crop Health</TabsTrigger>
+                <TabsTrigger value="insurance">Risk Assessment</TabsTrigger>
               </TabsList>
               
               {useCases.map((useCase, index) => (
-                <TabsContent key={index} value={index === 0 ? "yield" : index === 1 ? "disease" : "optimization"}>
-                  <Card>
+                <TabsContent key={index} value={index === 0 ? "yield" : index === 1 ? "health" : "insurance"}>
+                  <Card className="border-t-4 border-t-primary">
                     <CardHeader>
-                      <CardTitle className="text-2xl">{useCase.title}</CardTitle>
+                      <CardTitle className="text-2xl flex items-center gap-2">
+                        {index === 0 && <TrendingUp className="w-6 h-6 text-primary" />}
+                        {index === 1 && <Leaf className="w-6 h-6 text-primary" />}
+                        {index === 2 && <AlertTriangle className="w-6 h-6 text-primary" />}
+                        {useCase.title}
+                      </CardTitle>
                       <CardDescription className="text-lg">{useCase.description}</CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -196,7 +285,7 @@ const AIDataAnalytics = () => {
                 Proven Performance
               </h2>
               <p className="text-lg text-muted-foreground">
-                Real results from farms using our AI analytics platform
+                Real results from farms using our satellite analytics platform
               </p>
             </div>
             
@@ -219,12 +308,15 @@ const AIDataAnalytics = () => {
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
+                <Badge variant="secondary" className="mb-4">
+                  Farmer-Focused Solutions
+                </Badge>
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
                   Intelligence That Delivers
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Our AI platform doesn't just analyze data – it provides actionable insights 
-                  that directly impact your bottom line and farming efficiency.
+                  Our intuitive platform offers advisory and services to boost farm productivity 
+                  and maximize farmer revenue through satellite-powered insights.
                 </p>
                 <div className="space-y-4">
                   {benefits.map((benefit, index) => (
@@ -241,25 +333,26 @@ const AIDataAnalytics = () => {
               </div>
               
               <div className="relative">
-                <Card className="p-8 bg-gradient-to-br from-primary/5 to-accent/5">
+                <Card className="p-8 bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-primary/20">
                   <div className="text-center">
-                    <Activity className="w-16 h-16 text-primary mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold text-foreground mb-4">Real-Time Dashboard</h3>
+                    <Satellite className="w-16 h-16 text-primary mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold text-foreground mb-4">Real-Time Satellite Dashboard</h3>
                     <p className="text-muted-foreground mb-6">
-                      Monitor all your AI insights and recommendations from a single, intuitive interface
+                      Monitor all your fields from space with an intuitive interface showing 
+                      crop health, weather alerts, and yield predictions.
                     </p>
                     <div className="grid grid-cols-3 gap-4 text-center">
                       <div>
-                        <LineChart className="w-8 h-8 text-primary mx-auto mb-2" />
-                        <div className="text-sm text-muted-foreground">Trends</div>
+                        <Globe className="w-8 h-8 text-primary mx-auto mb-2" />
+                        <div className="text-sm text-muted-foreground">Satellite View</div>
                       </div>
                       <div>
-                        <PieChart className="w-8 h-8 text-earth mx-auto mb-2" />
-                        <div className="text-sm text-muted-foreground">Analytics</div>
+                        <Leaf className="w-8 h-8 text-earth mx-auto mb-2" />
+                        <div className="text-sm text-muted-foreground">Crop Health</div>
                       </div>
                       <div>
-                        <Cpu className="w-8 h-8 text-harvest mx-auto mb-2" />
-                        <div className="text-sm text-muted-foreground">AI Insights</div>
+                        <TrendingUp className="w-8 h-8 text-harvest mx-auto mb-2" />
+                        <div className="text-sm text-muted-foreground">Yield Forecast</div>
                       </div>
                     </div>
                   </div>
@@ -274,15 +367,16 @@ const AIDataAnalytics = () => {
           <div className="container mx-auto px-4 text-center">
             <div className="max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Ready to Unlock Your Farm's Potential?
+                Ready to Monitor Your Fields From Space?
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Join thousands of farmers who are already using AI to increase yields, 
-                reduce costs, and make smarter farming decisions.
+                Join thousands of farmers leveraging satellite imagery and AI analytics to 
+                increase yields, reduce risks, and make smarter farming decisions.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
-                  Start AI Analysis
+                  <Satellite className="mr-2 w-5 h-5" />
+                  Start Satellite Monitoring
                 </Button>
                 <Button variant="outline" size="lg">
                   Book Consultation
