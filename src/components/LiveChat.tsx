@@ -3,8 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { X, Send, MessageSquare, User, Headphones } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/hooks/use-toast';
 
 interface Message {
   id: string;
@@ -20,40 +18,22 @@ interface LiveChatProps {
 const LiveChat: React.FC<LiveChatProps> = ({ onClose }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
-  const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
   const [isConnected, setIsConnected] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
 
   useEffect(() => {
-    // Set up real-time subscription for chat messages
-    const channel = supabase
-      .channel('chat-messages')
-      .on(
-        'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'chat_messages',
-          filter: `session_id=eq.${sessionId}`
-        },
-        (payload) => {
-          const newMessage = payload.new as Message;
-          setMessages(prev => [...prev, newMessage]);
-        }
-      )
-      .subscribe((status) => {
-        if (status === 'SUBSCRIBED') {
-          setIsConnected(true);
-          // Send initial welcome message from agent
-          sendAgentMessage("Hello! Welcome to AgriRise support. How can I help you with your farming technology needs today?");
-        }
-      });
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, [sessionId]);
+    // Simulate connection and send welcome message
+    setTimeout(() => {
+      setIsConnected(true);
+      const welcomeMessage: Message = {
+        id: `msg_${Date.now()}`,
+        message: "Hello! Welcome to AgriRise support. How can I help you with your farming technology needs today?",
+        sender_type: 'agent',
+        created_at: new Date().toISOString()
+      };
+      setMessages([welcomeMessage]);
+    }, 500);
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
@@ -63,61 +43,41 @@ const LiveChat: React.FC<LiveChatProps> = ({ onClose }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const sendAgentMessage = async (message: string) => {
-    try {
-      await supabase
-        .from('chat_messages')
-        .insert([
-          {
-            session_id: sessionId,
-            sender_type: 'agent',
-            message
-          }
-        ]);
-    } catch (error) {
-      console.error('Error sending agent message:', error);
-    }
+  const sendAgentMessage = (message: string) => {
+    const agentMessage: Message = {
+      id: `msg_${Date.now()}_agent`,
+      message,
+      sender_type: 'agent',
+      created_at: new Date().toISOString()
+    };
+    setMessages(prev => [...prev, agentMessage]);
   };
 
   const sendMessage = async () => {
     if (!newMessage.trim()) return;
 
-    try {
-      const { error } = await supabase
-        .from('chat_messages')
-        .insert([
-          {
-            session_id: sessionId,
-            sender_type: 'user',
-            message: newMessage.trim()
-          }
-        ]);
+    // Add user message
+    const userMessage: Message = {
+      id: `msg_${Date.now()}_user`,
+      message: newMessage.trim(),
+      sender_type: 'user',
+      created_at: new Date().toISOString()
+    };
+    setMessages(prev => [...prev, userMessage]);
+    const messageText = newMessage.trim();
+    setNewMessage('');
 
-      if (error) throw error;
-
-      setNewMessage('');
-
-      // Get AI response
-      const { data, error: functionError } = await supabase.functions.invoke('send-support-message', {
-        body: {
-          message: newMessage.trim(),
-          sessionId: sessionId
-        }
-      });
-
-      if (functionError) {
-        console.error('Error calling AI function:', functionError);
-        // Fallback to a generic response
-        await sendAgentMessage("I apologize, but I'm having trouble processing your request right now. Our team will get back to you shortly.");
-      }
-    } catch (error) {
-      console.error('Error sending message:', error);
-      toast({
-        title: "Error sending message",
-        description: "Please try again.",
-        variant: "destructive"
-      });
-    }
+    // Simulate AI response after a short delay
+    setTimeout(() => {
+      const responses = [
+        "Thank you for your message! Our team specializes in solar-powered irrigation, precision farming, and smart monitoring solutions. How can we assist you specifically?",
+        "I'd be happy to help! We offer a range of products including SolarPump Pro, SmartSoil Monitors, and WeatherStation Elite. Would you like more information about any of these?",
+        "Great question! Our solutions are designed to help farmers increase yields while reducing costs. Would you like to schedule a consultation with our experts?",
+        "I understand your needs. We can provide customized solutions based on your farm size and requirements. Would you like to speak with a specialist?",
+      ];
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+      sendAgentMessage(randomResponse);
+    }, 1000);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
