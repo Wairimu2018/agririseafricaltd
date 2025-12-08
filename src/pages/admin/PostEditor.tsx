@@ -1,0 +1,556 @@
+import { useState, useEffect, useRef } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
+import { 
+  ArrowLeft, 
+  Save, 
+  Upload, 
+  X, 
+  Image as ImageIcon,
+  Lock,
+  Loader2
+} from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+
+interface PostImage {
+  id?: string;
+  image_url: string;
+  caption: string;
+  display_order: number;
+  file?: File;
+}
+
+const ADMIN_PASSWORD = 'agririse2024';
+
+const PostEditor = () => {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const coverInputRef = useRef<HTMLInputElement>(null);
+  
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+  
+  const [title, setTitle] = useState('');
+  const [slug, setSlug] = useState('');
+  const [excerpt, setExcerpt] = useState('');
+  const [content, setContent] = useState('');
+  const [category, setCategory] = useState('update');
+  const [isPublished, setIsPublished] = useState(false);
+  const [coverImage, setCoverImage] = useState<string | null>(null);
+  const [coverFile, setCoverFile] = useState<File | null>(null);
+  const [galleryImages, setGalleryImages] = useState<PostImage[]>([]);
+
+  const isEditing = id !== 'new';
+
+  useEffect(() => {
+    const authStatus = sessionStorage.getItem('admin_authenticated');
+    if (authStatus === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated && isEditing && id) {
+      fetchPost();
+    }
+  }, [isAuthenticated, isEditing, id]);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      sessionStorage.setItem('admin_authenticated', 'true');
+      setPasswordError('');
+    } else {
+      setPasswordError('Incorrect password');
+    }
+  };
+
+  const fetchPost = async () => {
+    setLoading(true);
+    const { data: post, error } = await supabase
+      .from('posts')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      toast({
+        title: 'Error loading post',
+        description: error.message,
+        variant: 'destructive'
+      });
+      navigate('/admin');
+      return;
+    }
+
+    if (post) {
+      setTitle(post.title);
+      setSlug(post.slug);
+      setExcerpt(post.excerpt || '');
+      setContent(post.content);
+      setCategory(post.category);
+      setIsPublished(post.is_published);
+      setCoverImage(post.cover_image);
+
+      // Fetch gallery images
+      const { data: images } = await supabase
+        .from('post_images')
+        .select('*')
+        .eq('post_id', id)
+        .order('display_order', { ascending: true });
+
+      if (images) {
+        setGalleryImages(images.map(img => ({
+          id: img.id,
+          image_url: img.image_url,
+          caption: img.caption || '',
+          display_order: img.display_order
+        })));
+      }
+    }
+    setLoading(false);
+  };
+
+  const generateSlug = (text: string) => {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+  };
+
+  const handleTitleChange = (value: string) => {
+    setTitle(value);
+    if (!isEditing) {
+      setSlug(generateSlug(value));
+    }
+  };
+
+  const handleCoverUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setCoverFile(file);
+      setCoverImage(URL.createObjectURL(file));
+    }
+  };
+
+  const handleGalleryUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      const newImages: PostImage[] = Array.from(files).map((file, index) => ({
+        image_url: URL.createObjectURL(file),
+        caption: '',
+        display_order: galleryImages.length + index,
+        file
+      }));
+      setGalleryImages([...galleryImages, ...newImages]);
+    }
+  };
+
+  const removeGalleryImage = (index: number) => {
+    setGalleryImages(galleryImages.filter((_, i) => i !== index));
+  };
+
+  const uploadImage = async (file: File, path: string): Promise<string | null> => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${path}/${Date.now()}.${fileExt}`;
+    
+    const { error } = await supabase.storage
+      .from('post-images')
+      .upload(fileName, file);
+
+    if (error) {
+      console.error('Upload error:', error);
+      return null;
+    }
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('post-images')
+      .getPublicUrl(fileName);
+
+    return publicUrl;
+  };
+
+  const handleSave = async () => {
+    if (!title || !slug || !content) {
+      toast({
+        title: 'Missing required fields',
+        description: 'Please fill in title, slug, and content.',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    setSaving(true);
+
+    try {
+      let finalCoverImage = coverImage;
+
+      // Upload cover image if new
+      if (coverFile) {
+        const uploadedUrl = await uploadImage(coverFile, 'covers');
+        if (uploadedUrl) {
+          finalCoverImage = uploadedUrl;
+        }
+      }
+
+      const postData = {
+        title,
+        slug,
+        excerpt: excerpt || null,
+        content,
+        category,
+        is_published: isPublished,
+        cover_image: finalCoverImage,
+        published_at: isPublished ? new Date().toISOString() : null
+      };
+
+      let postId = id;
+
+      if (isEditing) {
+        const { error } = await supabase
+          .from('posts')
+          .update(postData)
+          .eq('id', id);
+
+        if (error) throw error;
+      } else {
+        const { data, error } = await supabase
+          .from('posts')
+          .insert(postData)
+          .select('id')
+          .single();
+
+        if (error) throw error;
+        postId = data.id;
+      }
+
+      // Handle gallery images
+      for (const img of galleryImages) {
+        if (img.file) {
+          const uploadedUrl = await uploadImage(img.file, `gallery/${postId}`);
+          if (uploadedUrl) {
+            await supabase.from('post_images').insert({
+              post_id: postId,
+              image_url: uploadedUrl,
+              caption: img.caption || null,
+              display_order: img.display_order
+            });
+          }
+        } else if (img.id) {
+          // Update existing image caption
+          await supabase.from('post_images')
+            .update({ caption: img.caption || null })
+            .eq('id', img.id);
+        }
+      }
+
+      toast({
+        title: isEditing ? 'Post updated' : 'Post created',
+        description: isPublished ? 'Your post is now live!' : 'Your post has been saved as a draft.'
+      });
+
+      navigate('/admin');
+    } catch (error: any) {
+      toast({
+        title: 'Error saving post',
+        description: error.message,
+        variant: 'destructive'
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col">
+        <Navigation />
+        <div className="flex-1 flex items-center justify-center py-20">
+          <Card className="w-full max-w-md mx-4">
+            <CardHeader className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Lock className="w-8 h-8 text-primary" />
+              </div>
+              <CardTitle className="text-2xl">Admin Access</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleLogin} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter admin password"
+                  />
+                  {passwordError && (
+                    <p className="text-sm text-destructive">{passwordError}</p>
+                  )}
+                </div>
+                <Button type="submit" className="w-full">
+                  Access Dashboard
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col">
+        <Navigation />
+        <div className="flex-1 flex items-center justify-center">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      <Navigation />
+      
+      <div className="flex-1 py-12">
+        <div className="container mx-auto px-4 max-w-4xl">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-4">
+              <Link to="/admin">
+                <Button variant="ghost" size="sm">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back
+                </Button>
+              </Link>
+              <h1 className="text-2xl font-bold text-foreground">
+                {isEditing ? 'Edit Post' : 'New Post'}
+              </h1>
+            </div>
+            <Button onClick={handleSave} disabled={saving}>
+              {saving ? (
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              ) : (
+                <Save className="w-4 h-4 mr-2" />
+              )}
+              {saving ? 'Saving...' : 'Save'}
+            </Button>
+          </div>
+
+          <div className="grid gap-8">
+            {/* Basic Info */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Post Details</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-2">
+                  <Label htmlFor="title">Title *</Label>
+                  <Input
+                    id="title"
+                    value={title}
+                    onChange={(e) => handleTitleChange(e.target.value)}
+                    placeholder="Enter post title"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="slug">Slug *</Label>
+                  <Input
+                    id="slug"
+                    value={slug}
+                    onChange={(e) => setSlug(e.target.value)}
+                    placeholder="post-url-slug"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="category">Category</Label>
+                    <Select value={category} onValueChange={setCategory}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="update">Update</SelectItem>
+                        <SelectItem value="project">Project</SelectItem>
+                        <SelectItem value="event">Event</SelectItem>
+                        <SelectItem value="news">News</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label>Publish</Label>
+                      <p className="text-sm text-muted-foreground">
+                        Make this post visible
+                      </p>
+                    </div>
+                    <Switch
+                      checked={isPublished}
+                      onCheckedChange={setIsPublished}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="excerpt">Excerpt</Label>
+                  <Textarea
+                    id="excerpt"
+                    value={excerpt}
+                    onChange={(e) => setExcerpt(e.target.value)}
+                    placeholder="Brief description shown in the posts list"
+                    rows={2}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="content">Content *</Label>
+                  <Textarea
+                    id="content"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    placeholder="Write your post content here... (HTML supported)"
+                    rows={12}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Cover Image */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Cover Image</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <input
+                  ref={coverInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleCoverUpload}
+                  className="hidden"
+                />
+                
+                {coverImage ? (
+                  <div className="relative">
+                    <img 
+                      src={coverImage} 
+                      alt="Cover" 
+                      className="w-full aspect-video object-cover rounded-lg"
+                    />
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      className="absolute top-2 right-2"
+                      onClick={() => {
+                        setCoverImage(null);
+                        setCoverFile(null);
+                      }}
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => coverInputRef.current?.click()}
+                    className="w-full aspect-video border-2 border-dashed border-border rounded-lg flex flex-col items-center justify-center gap-2 hover:border-primary/50 transition-colors"
+                  >
+                    <Upload className="w-8 h-8 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">Upload cover image</span>
+                  </button>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Gallery Images */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Gallery Images</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={handleGalleryUpload}
+                  className="hidden"
+                />
+                
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+                  {galleryImages.map((img, index) => (
+                    <div key={index} className="relative group">
+                      <img 
+                        src={img.image_url} 
+                        alt={`Gallery ${index + 1}`}
+                        className="w-full aspect-square object-cover rounded-lg"
+                      />
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                        onClick={() => removeGalleryImage(index)}
+                      >
+                        <X className="w-4 h-4" />
+                      </Button>
+                      <Input
+                        placeholder="Caption"
+                        value={img.caption}
+                        onChange={(e) => {
+                          const updated = [...galleryImages];
+                          updated[index].caption = e.target.value;
+                          setGalleryImages(updated);
+                        }}
+                        className="mt-2"
+                      />
+                    </div>
+                  ))}
+                  
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="aspect-square border-2 border-dashed border-border rounded-lg flex flex-col items-center justify-center gap-2 hover:border-primary/50 transition-colors"
+                  >
+                    <ImageIcon className="w-8 h-8 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">Add images</span>
+                  </button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default PostEditor;
