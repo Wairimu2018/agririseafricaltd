@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -22,7 +22,8 @@ import {
   X, 
   Image as ImageIcon,
   Lock,
-  Loader2
+  Loader2,
+  GripVertical
 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -59,6 +60,8 @@ const PostEditor = () => {
   const [coverImage, setCoverImage] = useState<string | null>(null);
   const [coverFile, setCoverFile] = useState<File | null>(null);
   const [galleryImages, setGalleryImages] = useState<PostImage[]>([]);
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
 
   const isEditing = id !== 'new';
 
@@ -171,6 +174,69 @@ const PostEditor = () => {
     setGalleryImages(galleryImages.filter((_, i) => i !== index));
   };
 
+  const handleDragStart = useCallback((e: React.DragEvent, index: number) => {
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', index.toString());
+  }, []);
+
+  const handleDragOver = useCallback((e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    if (draggedIndex !== null && index !== draggedIndex) {
+      setDragOverIndex(index);
+    }
+  }, [draggedIndex]);
+
+  const handleDragLeave = useCallback(() => {
+    setDragOverIndex(null);
+  }, []);
+
+  const handleDrop = useCallback((e: React.DragEvent, dropIndex: number) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === dropIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+
+    const newImages = [...galleryImages];
+    const [draggedItem] = newImages.splice(draggedIndex, 1);
+    newImages.splice(dropIndex, 0, draggedItem);
+    
+    // Update display_order for all images
+    const reorderedImages = newImages.map((img, idx) => ({
+      ...img,
+      display_order: idx
+    }));
+    
+    setGalleryImages(reorderedImages);
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  }, [draggedIndex, galleryImages]);
+
+  const handleDragEnd = useCallback(() => {
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  }, []);
+
+  const handleDropZone = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+    if (files && files.length > 0) {
+      const imageFiles = Array.from(files).filter(file => file.type.startsWith('image/'));
+      if (imageFiles.length > 0) {
+        const newImages: PostImage[] = imageFiles.map((file, index) => ({
+          image_url: URL.createObjectURL(file),
+          caption: '',
+          display_order: galleryImages.length + index,
+          file
+        }));
+        setGalleryImages([...galleryImages, ...newImages]);
+      }
+    }
+  }, [galleryImages]);
+
   const uploadImage = async (file: File, path: string): Promise<string | null> => {
     const fileExt = file.name.split('.').pop();
     const fileName = `${path}/${Date.now()}.${fileExt}`;
@@ -258,9 +324,12 @@ const PostEditor = () => {
             });
           }
         } else if (img.id) {
-          // Update existing image caption
+          // Update existing image caption and display_order
           await supabase.from('post_images')
-            .update({ caption: img.caption || null })
+            .update({ 
+              caption: img.caption || null,
+              display_order: img.display_order
+            })
             .eq('id', img.id);
         }
       }
@@ -492,7 +561,12 @@ const PostEditor = () => {
             {/* Gallery Images */}
             <Card>
               <CardHeader>
-                <CardTitle>Gallery Images</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  Gallery Images
+                  <span className="text-sm font-normal text-muted-foreground">
+                    (drag to reorder)
+                  </span>
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <input
@@ -504,13 +578,33 @@ const PostEditor = () => {
                   className="hidden"
                 />
                 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+                <div 
+                  className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4"
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={handleDropZone}
+                >
                   {galleryImages.map((img, index) => (
-                    <div key={index} className="relative group">
+                    <div 
+                      key={img.id || `new-${index}`} 
+                      draggable
+                      onDragStart={(e) => handleDragStart(e, index)}
+                      onDragOver={(e) => handleDragOver(e, index)}
+                      onDragLeave={handleDragLeave}
+                      onDrop={(e) => handleDrop(e, index)}
+                      onDragEnd={handleDragEnd}
+                      className={`relative group cursor-move transition-all duration-200 ${
+                        draggedIndex === index ? 'opacity-50 scale-95' : ''
+                      } ${
+                        dragOverIndex === index ? 'ring-2 ring-primary ring-offset-2' : ''
+                      }`}
+                    >
+                      <div className="absolute top-2 left-2 z-10 bg-background/80 backdrop-blur-sm rounded p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <GripVertical className="w-4 h-4 text-muted-foreground" />
+                      </div>
                       <img 
                         src={img.image_url} 
                         alt={`Gallery ${index + 1}`}
-                        className="w-full aspect-square object-cover rounded-lg"
+                        className="w-full aspect-square object-cover rounded-lg pointer-events-none"
                       />
                       <Button
                         variant="destructive"
@@ -536,10 +630,23 @@ const PostEditor = () => {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
+                    onDragOver={(e) => {
+                      e.preventDefault();
+                      e.currentTarget.classList.add('border-primary', 'bg-primary/5');
+                    }}
+                    onDragLeave={(e) => {
+                      e.currentTarget.classList.remove('border-primary', 'bg-primary/5');
+                    }}
+                    onDrop={(e) => {
+                      e.currentTarget.classList.remove('border-primary', 'bg-primary/5');
+                      handleDropZone(e);
+                    }}
                     className="aspect-square border-2 border-dashed border-border rounded-lg flex flex-col items-center justify-center gap-2 hover:border-primary/50 transition-colors"
                   >
                     <ImageIcon className="w-8 h-8 text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">Add images</span>
+                    <span className="text-sm text-muted-foreground text-center px-2">
+                      Click or drop images here
+                    </span>
                   </button>
                 </div>
               </CardContent>
