@@ -1,9 +1,15 @@
+import { useState } from 'react';
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Award, Users, Target, Heart, ArrowRight } from 'lucide-react';
+import ConsultationForm from '@/components/ConsultationForm';
 
 const About = () => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   const values = [
     {
       icon: <Target className="w-8 h-8 text-primary" />,
@@ -49,7 +55,7 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Navigation />
       
       {/* Hero Section */}
@@ -85,10 +91,20 @@ const About = () => {
                 We believe that technology should be accessible, practical, and designed with the farmer's 
                 real-world challenges in mind. Every solution we develop is tested in actual farming conditions.
               </p>
-              <Button variant="nature" size="lg">
-                Learn More About Our Impact
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
+              <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+                <DialogTrigger asChild>
+                  <Button variant="nature" size="lg">
+                    Learn More About Our Impact
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle>Get In Touch With Us</DialogTitle>
+                  </DialogHeader>
+                  <ConsultationForm onClose={() => setIsFormOpen(false)} />
+                </DialogContent>
+              </Dialog>
             </div>
             <div className="grid grid-cols-2 gap-6">
               <div className="text-center p-6 bg-gradient-to-br from-primary/10 to-accent/20 rounded-xl">
@@ -182,20 +198,38 @@ const About = () => {
             collaborating on sustainable agriculture solutions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              variant="nature" 
-              size="lg"
-              onClick={() => window.location.href = '/#contact'}
-            >
-              Partner With Us
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <Button variant="outline" size="lg">
-              View Career Opportunities
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="nature" size="lg">
+                  Partner With Us
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>Partner With AgriRise</DialogTitle>
+                </DialogHeader>
+                <ConsultationForm />
+              </DialogContent>
+            </Dialog>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="lg">
+                  Contact Us
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>Get In Touch</DialogTitle>
+                </DialogHeader>
+                <ConsultationForm />
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

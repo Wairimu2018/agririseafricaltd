@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import Layout from '@/components/Layout';
+import ConsultationForm from '@/components/ConsultationForm';
 import { 
   Gauge, 
   CloudRain, 
@@ -18,6 +21,8 @@ import {
 } from 'lucide-react';
 
 const SoilWeatherMonitoring = () => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   const features = [
     {
       icon: <Gauge className="w-6 h-6 text-primary" />,
@@ -71,7 +76,7 @@ const SoilWeatherMonitoring = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
+      <div className="bg-gradient-to-b from-background to-muted/30">
         {/* Hero Section */}
         <section className="py-20 bg-gradient-to-r from-primary/10 to-earth/10">
           <div className="container mx-auto px-4">
@@ -89,12 +94,32 @@ const SoilWeatherMonitoring = () => {
                 directly impact your crop performance.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
-                  Start Free Trial
-                </Button>
-                <Button variant="outline" size="lg">
-                  View Live Demo
-                </Button>
+                <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+                  <DialogTrigger asChild>
+                    <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
+                      Start Free Trial
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Start Your Free Trial</DialogTitle>
+                    </DialogHeader>
+                    <ConsultationForm onClose={() => setIsFormOpen(false)} />
+                  </DialogContent>
+                </Dialog>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" size="lg">
+                      View Live Demo
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Schedule a Live Demo</DialogTitle>
+                    </DialogHeader>
+                    <ConsultationForm />
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>
@@ -219,12 +244,32 @@ const SoilWeatherMonitoring = () => {
                 your farming operations. No long-term commitment required.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
-                  Start Free Trial
-                </Button>
-                <Button variant="outline" size="lg">
-                  Schedule Demo
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
+                      Start Free Trial
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Start Your Free Trial</DialogTitle>
+                    </DialogHeader>
+                    <ConsultationForm />
+                  </DialogContent>
+                </Dialog>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" size="lg">
+                      Schedule Demo
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Schedule a Demo</DialogTitle>
+                    </DialogHeader>
+                    <ConsultationForm />
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>

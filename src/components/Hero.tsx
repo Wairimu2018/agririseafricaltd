@@ -1,22 +1,21 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from "@/components/ui/badge";
-// import { ArrowRight, ChevronDown } from "lucide-react";
-import { ArrowRight, ChevronDown} from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 import aerialHeroImage from '@/assets/aerial-farm-hero.jpg';
+import ConsultationForm from './ConsultationForm';
 
 const Hero = () => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
-      {/* <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-drone-pan"
         style={{ backgroundImage: `url(${aerialHeroImage})` }}
-        > */}
-        <div
-  className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-drone-pan"
-  style={{ backgroundImage: `url(${aerialHeroImage})` }}
       >
-
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
@@ -47,15 +46,24 @@ const Hero = () => {
                 Through sustainable farming and smart collaboration, we grow more than crops — we grow impact.
               </p>
               
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="bg-white/10 text-white border border-white/20 hover:bg-white/20 hover-lift"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Start growing with us
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+                <DialogTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="bg-white/10 text-white border border-white/20 hover:bg-white/20 hover-lift"
+                  >
+                    Start growing with us
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle>Let's Work Together</DialogTitle>
+                  </DialogHeader>
+                  <ConsultationForm onClose={() => setIsFormOpen(false)} />
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
 
@@ -71,15 +79,18 @@ const Hero = () => {
               </div>
             </div>
 
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="bg-white/10 text-white border border-white/20 hover:bg-white/20 hover-lift animate-fade-in stagger-6"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Start growing with us
-              <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
+            <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+              <DialogTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="bg-white/10 text-white border border-white/20 hover:bg-white/20 hover-lift animate-fade-in stagger-6"
+                >
+                  Start growing with us
+                  <ChevronDown className="ml-2 h-4 w-4" />
+                </Button>
+              </DialogTrigger>
+            </Dialog>
           </div>
         </div>
       </div>
@@ -91,4 +102,5 @@ const Hero = () => {
     </section>
   );
 };
+
 export default Hero;

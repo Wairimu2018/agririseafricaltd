@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useNavigate } from 'react-router-dom';
+import ConsultationForm from '@/components/ConsultationForm';
 import { 
   Cpu, 
   Smartphone, 
@@ -17,11 +21,12 @@ import {
   Sun,
   Droplets
 } from 'lucide-react';
-import precisionImage from '@/assets/precision-farming.jpg'
 import solarImage from '@/assets/solar-irrigation.jpg';
 
 const Solutions = () => {
   const navigate = useNavigate();
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   const solutions = [
     {
       icon: <Sun className="w-8 h-8 text-harvest" />,
@@ -87,7 +92,7 @@ const Solutions = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Navigation />
       
       {/* Hero Section */}
@@ -145,7 +150,7 @@ const Solutions = () => {
                   <CheckCircle className="w-5 h-5 text-primary" />
                   <span className="text-foreground">80% reduction in energy costs</span>
                 </div>
-                </div>
+              </div>
               <Button 
                 variant="nature" 
                 size="lg"
@@ -234,15 +239,24 @@ const Solutions = () => {
 
                   <div className="pt-4 border-t border-border">
                     <div className="text-2xl font-bold text-primary mb-4">{solution.price}</div>
-                    <Button 
-                      variant={solution.popular ? "default" : "outline"}
-                      size="sm" 
-                      className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300"
-                      onClick={() => window.open(`https://wa.me/254701234567?text=Hi! I am interested in learning more about ${solution.title}. Could you provide more details about pricing and implementation?`, '_blank')}
-                    >
-                      Get Started
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button 
+                          variant={solution.popular ? "default" : "outline"}
+                          size="sm" 
+                          className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300"
+                        >
+                          Get Started
+                          <ArrowRight className="ml-2 w-4 h-4" />
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                        <DialogHeader>
+                          <DialogTitle>Get Started with {solution.title}</DialogTitle>
+                        </DialogHeader>
+                        <ConsultationForm />
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </CardContent>
               </Card>
@@ -261,16 +275,38 @@ const Solutions = () => {
             Join thousands of farmers who have increased their yields and reduced costs with our technology.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="nature" size="lg">
-              Schedule a Demo
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <Button variant="outline" size="lg">
-              Download Brochure
-            </Button>
+            <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+              <DialogTrigger asChild>
+                <Button variant="nature" size="lg">
+                  Schedule a Demo
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>Schedule a Demo</DialogTitle>
+                </DialogHeader>
+                <ConsultationForm onClose={() => setIsFormOpen(false)} />
+              </DialogContent>
+            </Dialog>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="lg">
+                  Request Consultation
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>Request a Consultation</DialogTitle>
+                </DialogHeader>
+                <ConsultationForm />
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

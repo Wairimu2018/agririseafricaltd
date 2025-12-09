@@ -1,16 +1,25 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Smartphone, Calendar, BarChart3, Users } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { ArrowLeft, Smartphone, Calendar, BarChart3 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import ConsultationForm from '@/components/ConsultationForm';
 
 const FarmManagement = () => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <Link to="/" className="inline-flex items-center text-primary hover:text-primary/80 transition-colors mb-8">
+    <div className="min-h-screen bg-background flex flex-col">
+      <Navigation />
+      
+      <div className="container mx-auto px-4 py-8 flex-1">
+        <Link to="/solutions" className="inline-flex items-center text-primary hover:text-primary/80 transition-colors mb-8">
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Home
+          Back to Solutions
         </Link>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
@@ -100,11 +109,23 @@ const FarmManagement = () => {
         </div>
 
         <div className="text-center">
-          <Button size="lg" className="bg-gradient-to-r from-earth to-harvest">
-            Request Demo
-          </Button>
+          <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+            <DialogTrigger asChild>
+              <Button size="lg" className="bg-gradient-to-r from-earth to-harvest">
+                Request Demo
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>Request Farm Management Demo</DialogTitle>
+              </DialogHeader>
+              <ConsultationForm onClose={() => setIsFormOpen(false)} />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
