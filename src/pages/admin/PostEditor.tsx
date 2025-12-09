@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import RichTextEditor from '@/components/RichTextEditor';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -500,13 +501,11 @@ const PostEditor = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="content">Content *</Label>
-                  <Textarea
-                    id="content"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    placeholder="Write your post content here... (HTML supported)"
-                    rows={12}
+                  <Label>Content *</Label>
+                  <RichTextEditor
+                    content={content}
+                    onChange={setContent}
+                    placeholder="Write your post content here..."
                   />
                 </div>
               </CardContent>
