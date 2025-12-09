@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import Layout from '@/components/Layout';
+import ConsultationForm from '@/components/ConsultationForm';
 import { 
   Brain, 
   BarChart3, 
@@ -144,13 +147,33 @@ const AIDataAnalytics = () => {
                 decisions at the right time.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
-                  <Satellite className="mr-2 w-5 h-5" />
-                  Start Satellite Monitoring
-                </Button>
-                <Button variant="outline" size="lg">
-                  Watch Demo
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
+                      <Satellite className="mr-2 w-5 h-5" />
+                      Start Satellite Monitoring
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Start Satellite Monitoring</DialogTitle>
+                    </DialogHeader>
+                    <ConsultationForm />
+                  </DialogContent>
+                </Dialog>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" size="lg">
+                      Watch Demo
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Schedule a Demo</DialogTitle>
+                    </DialogHeader>
+                    <ConsultationForm />
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>
@@ -374,13 +397,33 @@ const AIDataAnalytics = () => {
                 increase yields, reduce risks, and make smarter farming decisions.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
-                  <Satellite className="mr-2 w-5 h-5" />
-                  Start Satellite Monitoring
-                </Button>
-                <Button variant="outline" size="lg">
-                  Book Consultation
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
+                      <Satellite className="mr-2 w-5 h-5" />
+                      Start Satellite Monitoring
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Start Satellite Monitoring</DialogTitle>
+                    </DialogHeader>
+                    <ConsultationForm />
+                  </DialogContent>
+                </Dialog>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" size="lg">
+                      Book Consultation
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Book a Consultation</DialogTitle>
+                    </DialogHeader>
+                    <ConsultationForm />
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>

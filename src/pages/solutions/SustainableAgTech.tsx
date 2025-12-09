@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import Layout from '@/components/Layout';
+import ConsultationForm from '@/components/ConsultationForm';
 import { 
   Leaf, 
   Recycle, 
@@ -116,12 +119,32 @@ const SustainableAgTech = () => {
                 and profitability for future generations.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
-                  Start Sustainability Journey
-                </Button>
-                <Button variant="outline" size="lg">
-                  Download Impact Report
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
+                      Start Sustainability Journey
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Start Your Sustainability Journey</DialogTitle>
+                    </DialogHeader>
+                    <ConsultationForm />
+                  </DialogContent>
+                </Dialog>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" size="lg">
+                      Download Impact Report
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Get Impact Report</DialogTitle>
+                    </DialogHeader>
+                    <ConsultationForm />
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>
@@ -301,12 +324,32 @@ const SustainableAgTech = () => {
                 building more profitable and environmentally responsible operations.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
-                  Begin Sustainability Assessment
-                </Button>
-                <Button variant="outline" size="lg">
-                  Download Guide
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button size="lg" className="bg-gradient-to-r from-primary to-primary-light">
+                      Begin Sustainability Assessment
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Begin Your Assessment</DialogTitle>
+                    </DialogHeader>
+                    <ConsultationForm />
+                  </DialogContent>
+                </Dialog>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" size="lg">
+                      Download Guide
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Get Your Guide</DialogTitle>
+                    </DialogHeader>
+                    <ConsultationForm />
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>
