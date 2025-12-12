@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -169,6 +169,12 @@ const AdminLogin = () => {
                   'Sign In'
                 )}
               </Button>
+              <p className="text-center text-sm text-muted-foreground">
+                Need admin access?{' '}
+                <Link to="/admin/signup" className="text-primary hover:underline">
+                  Request access
+                </Link>
+              </p>
             </form>
           </CardContent>
         </Card>

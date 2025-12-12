@@ -28,6 +28,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
+import AccessRequestsManager from '@/components/admin/AccessRequestsManager';
 
 interface Post {
   id: string;
@@ -184,6 +185,9 @@ const AdminDashboard = () => {
               </Button>
             </div>
           </div>
+
+          {/* Access Requests */}
+          <AccessRequestsManager />
 
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
